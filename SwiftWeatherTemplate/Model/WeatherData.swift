@@ -22,7 +22,7 @@ struct WeatherData: Codable {
     let weather: [Weather]
 }
 
-extension WeatherData {
+extension WeatherData: ParseProtocol {
     static func parse(from json: JSON) -> WeatherData? {
         let decoder = JSONDecoder()
         do {

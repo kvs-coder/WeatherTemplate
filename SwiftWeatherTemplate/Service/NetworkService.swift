@@ -11,34 +11,25 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 
-enum API {
-    static let key = "5dfac62572f7baa9d93575ba3662c22b"
-    static let baseUrl = "https://api.openweathermap.org/data/2.5/"
-    static let imageUrl = "http://openweathermap.org/img/wn/"
-}
-
 class NetworkService {
-    func requestWeather(
+    enum API {
+        static let key = "5dfac62572f7baa9d93575ba3662c22b"
+        static let baseUrl = "https://api.openweathermap.org/data/2.5/"
+        static let imageUrl = "http://openweathermap.org/img/wn/"
+    }
+    
+    func requestForecast(
         latitude: Double,
         longitude: Double,
-        completionHandler: @escaping (WeatherData?, Error?) -> Void
+        completionHandler: @escaping (ForecastData?, Error?) -> Void
     ) {
-        let parameters: [String: Any] = [
-            "lat": latitude,
-            "lon": longitude,
-            "units": "metric",
-            "appid": API.key
-        ]
-        AF.request(
-            "\(API.baseUrl)weather",
-            parameters: parameters,
-            encoding: URLEncoding.queryString
-        ).responseJSON { (response) in
+        makeRequest(enpoint: "forecast", parameters: setParameters(
+            latitude: latitude,
+            longitude: longitude
+        )).responseJSON { (response) in
             switch response.result {
             case .success(let value):
-                let weatherData = WeatherData.parse(
-                    from: JSON(value)
-                )
+                let weatherData = ForecastData.parse(from: JSON(value))
                 completionHandler(weatherData, nil)
             case .failure(let error):
                 completionHandler(nil, error)
@@ -46,10 +37,26 @@ class NetworkService {
         }
     }
 
-    func downloadImage(
-            with id: String,
-            completionHandler: @escaping (Image?, Error?
-        ) -> Void) {
+    func requestWeather(
+        latitude: Double,
+        longitude: Double,
+        completionHandler: @escaping (WeatherData?, Error?) -> Void
+    ) {
+        makeRequest(enpoint: "weather", parameters: setParameters(
+            latitude: latitude,
+            longitude: longitude
+        )).responseJSON { (response) in
+            switch response.result {
+            case .success(let value):
+                let weatherData = WeatherData.parse(from: JSON(value))
+                completionHandler(weatherData, nil)
+            case .failure(let error):
+                completionHandler(nil, error)
+            }
+        }
+    }
+
+    func downloadImage(with id: String, completionHandler: @escaping (Image?, Error?) -> Void) {
         let imageDownloader = ImageDownloader(
             configuration: ImageDownloader.defaultURLSessionConfiguration(),
             downloadPrioritization: .fifo,
@@ -69,7 +76,25 @@ class NetworkService {
             }
         }
     }
-}
 
-//5 days api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={your api key}
-//now api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={your api key}
+    @discardableResult
+    private func makeRequest(enpoint: String, parameters: [String: Any]) -> DataRequest {
+        return AF.request(
+            "\(API.baseUrl)\(enpoint)",
+            parameters: parameters,
+            encoding: URLEncoding.queryString
+        )
+    }
+
+    private func setParameters(
+        latitude: Double,
+        longitude: Double
+    ) -> [String: Any] {
+             return [
+                 "lat": latitude,
+                 "lon": longitude,
+                 "units": "metric",
+                 "appid": API.key
+             ]
+    }
+}

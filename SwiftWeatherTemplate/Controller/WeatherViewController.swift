@@ -21,7 +21,10 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let networkService = NetworkService()
-        networkService.requestWeather(latitude: 50.0, longitude: 50.0) { [weak self] weatherData, error in
+        networkService.requestWeather(
+            latitude: 50.0,
+            longitude: 50.0
+        ) { [weak self] weatherData, error in
             guard let this = self, error == nil else {
                 print(error!)
                 return
@@ -39,7 +42,6 @@ class WeatherViewController: UIViewController {
                 }
             }
         }
-        // Do any additional setup after loading the view.
     }
 }
 
