@@ -3,14 +3,21 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		170C4FEB24C2124C006341AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 170C4FED24C2124C006341AD /* Localizable.strings */; };
+		17154C3E24C209040053E297 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 17154C3D24C209040053E297 /* Alamofire */; };
+		17154C4124C209380053E297 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 17154C4024C209380053E297 /* SwiftyJSON */; };
+		17154C4424C20C060053E297 /* ForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17154C4324C20C060053E297 /* ForecastViewController.swift */; };
+		17154C4724C20C430053E297 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17154C4624C20C430053E297 /* Weather.swift */; };
+		17154C4924C20F3F0053E297 /* ViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17154C4824C20F3F0053E297 /* ViewControllerProtocol.swift */; };
+		17154C4C24C210FB0053E297 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 17154C4B24C210FB0053E297 /* SnapKit */; };
+		17154C4E24C2110C0053E297 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17154C4D24C2110C0053E297 /* WeatherView.swift */; };
 		17A5853E24C1DAB7004747BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5853D24C1DAB7004747BB /* AppDelegate.swift */; };
 		17A5854024C1DAB7004747BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5853F24C1DAB7004747BB /* SceneDelegate.swift */; };
-		17A5854224C1DAB7004747BB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5854124C1DAB7004747BB /* ViewController.swift */; };
-		17A5854524C1DAB7004747BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17A5854324C1DAB7004747BB /* Main.storyboard */; };
+		17A5854224C1DAB7004747BB /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5854124C1DAB7004747BB /* WeatherViewController.swift */; };
 		17A5854724C1DAB7004747BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17A5854624C1DAB7004747BB /* Assets.xcassets */; };
 		17A5854A24C1DAB7004747BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17A5854824C1DAB7004747BB /* LaunchScreen.storyboard */; };
 		17A5855524C1DAB7004747BB /* SwiftWeatherTemplateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5855424C1DAB7004747BB /* SwiftWeatherTemplateTests.swift */; };
@@ -38,11 +45,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		170C4FEC24C2124C006341AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		17154C4324C20C060053E297 /* ForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewController.swift; sourceTree = "<group>"; };
+		17154C4624C20C430053E297 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		17154C4824C20F3F0053E297 /* ViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocol.swift; sourceTree = "<group>"; };
+		17154C4D24C2110C0053E297 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		17A5853A24C1DAB7004747BB /* SwiftWeatherTemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftWeatherTemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17A5853D24C1DAB7004747BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17A5853F24C1DAB7004747BB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		17A5854124C1DAB7004747BB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		17A5854424C1DAB7004747BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		17A5854124C1DAB7004747BB /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		17A5854624C1DAB7004747BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		17A5854924C1DAB7004747BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		17A5854B24C1DAB7004747BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -62,6 +73,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17154C4C24C210FB0053E297 /* SnapKit in Frameworks */,
+				17154C4124C209380053E297 /* SwiftyJSON in Frameworks */,
+				17154C3E24C209040053E297 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,9 +96,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		17154C4524C20C390053E297 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				17154C4624C20C430053E297 /* Weather.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		17154C4F24C211170053E297 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				17154C4824C20F3F0053E297 /* ViewControllerProtocol.swift */,
+				17154C4D24C2110C0053E297 /* WeatherView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		17A5853124C1DAB7004747BB = {
 			isa = PBXGroup;
 			children = (
+				170C4FED24C2124C006341AD /* Localizable.strings */,
 				17A5857024C1DAEA004747BB /* LICENSE */,
 				17A5856F24C1DAEA004747BB /* README.md */,
 				17A5856D24C1DAE2004747BB /* .swiftlint.yml */,
@@ -108,10 +140,12 @@
 		17A5853C24C1DAB7004747BB /* SwiftWeatherTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				17154C4F24C211170053E297 /* View */,
+				17154C4524C20C390053E297 /* Model */,
 				17A5853D24C1DAB7004747BB /* AppDelegate.swift */,
 				17A5853F24C1DAB7004747BB /* SceneDelegate.swift */,
-				17A5854124C1DAB7004747BB /* ViewController.swift */,
-				17A5854324C1DAB7004747BB /* Main.storyboard */,
+				17A5854124C1DAB7004747BB /* WeatherViewController.swift */,
+				17154C4324C20C060053E297 /* ForecastViewController.swift */,
 				17A5854624C1DAB7004747BB /* Assets.xcassets */,
 				17A5854824C1DAB7004747BB /* LaunchScreen.storyboard */,
 				17A5854B24C1DAB7004747BB /* Info.plist */,
@@ -147,12 +181,18 @@
 				17A5853624C1DAB7004747BB /* Sources */,
 				17A5853724C1DAB7004747BB /* Frameworks */,
 				17A5853824C1DAB7004747BB /* Resources */,
+				17154C4224C209CB0053E297 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = SwiftWeatherTemplate;
+			packageProductDependencies = (
+				17154C3D24C209040053E297 /* Alamofire */,
+				17154C4024C209380053E297 /* SwiftyJSON */,
+				17154C4B24C210FB0053E297 /* SnapKit */,
+			);
 			productName = SwiftWeatherTemplate;
 			productReference = 17A5853A24C1DAB7004747BB /* SwiftWeatherTemplate.app */;
 			productType = "com.apple.product-type.application";
@@ -225,6 +265,11 @@
 				Base,
 			);
 			mainGroup = 17A5853124C1DAB7004747BB;
+			packageReferences = (
+				17154C3C24C209040053E297 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				17154C3F24C209380053E297 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				17154C4A24C210FB0053E297 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 17A5853B24C1DAB7004747BB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -242,11 +287,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				17A5857224C1DAEA004747BB /* LICENSE in Resources */,
+				170C4FEB24C2124C006341AD /* Localizable.strings in Resources */,
 				17A5856E24C1DAE2004747BB /* .swiftlint.yml in Resources */,
 				17A5854A24C1DAB7004747BB /* LaunchScreen.storyboard in Resources */,
 				17A5857124C1DAEA004747BB /* README.md in Resources */,
 				17A5854724C1DAB7004747BB /* Assets.xcassets in Resources */,
-				17A5854524C1DAB7004747BB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,14 +311,38 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		17154C4224C209CB0053E297 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		17A5853624C1DAB7004747BB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17A5854224C1DAB7004747BB /* ViewController.swift in Sources */,
+				17154C4924C20F3F0053E297 /* ViewControllerProtocol.swift in Sources */,
+				17A5854224C1DAB7004747BB /* WeatherViewController.swift in Sources */,
+				17154C4424C20C060053E297 /* ForecastViewController.swift in Sources */,
 				17A5853E24C1DAB7004747BB /* AppDelegate.swift in Sources */,
 				17A5854024C1DAB7004747BB /* SceneDelegate.swift in Sources */,
+				17154C4E24C2110C0053E297 /* WeatherView.swift in Sources */,
+				17154C4724C20C430053E297 /* Weather.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,12 +378,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		17A5854324C1DAB7004747BB /* Main.storyboard */ = {
+		170C4FED24C2124C006341AD /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				17A5854424C1DAB7004747BB /* Base */,
+				170C4FEC24C2124C006341AD /* en */,
 			);
-			name = Main.storyboard;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		17A5854824C1DAB7004747BB /* LaunchScreen.storyboard */ = {
@@ -449,6 +518,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MAVP5V2N7V;
 				INFOPLIST_FILE = SwiftWeatherTemplate/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -467,6 +537,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MAVP5V2N7V;
 				INFOPLIST_FILE = SwiftWeatherTemplate/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -602,6 +673,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		17154C3C24C209040053E297 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.1;
+			};
+		};
+		17154C3F24C209380053E297 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		17154C4A24C210FB0053E297 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		17154C3D24C209040053E297 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17154C3C24C209040053E297 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		17154C4024C209380053E297 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17154C3F24C209380053E297 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		17154C4B24C210FB0053E297 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17154C4A24C210FB0053E297 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 17A5853224C1DAB7004747BB /* Project object */;
 }
