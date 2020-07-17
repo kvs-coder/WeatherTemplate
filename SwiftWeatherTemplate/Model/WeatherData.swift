@@ -19,6 +19,7 @@ struct WeatherData: Codable {
     }
 
     let main: Main
+    let dt: TimeInterval
     let weather: [Weather]
 }
 

@@ -17,7 +17,7 @@ class NetworkService {
         static let baseUrl = "https://api.openweathermap.org/data/2.5/"
         static let imageUrl = "http://openweathermap.org/img/wn/"
     }
-    
+
     func requestForecast(
         latitude: Double,
         longitude: Double,
@@ -60,7 +60,6 @@ class NetworkService {
         let imageDownloader = ImageDownloader(
             configuration: ImageDownloader.defaultURLSessionConfiguration(),
             downloadPrioritization: .fifo,
-            maximumActiveDownloads: 4,
             imageCache: AutoPurgingImageCache()
         )
         guard let url = URL(string:"\(API.imageUrl)\(id)@2x.png") else {

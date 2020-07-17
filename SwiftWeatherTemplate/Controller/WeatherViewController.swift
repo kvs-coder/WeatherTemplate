@@ -32,15 +32,15 @@ class WeatherViewController: UIViewController {
             guard let first = weatherData?.weather.first else {
                 return
             }
-            networkService.downloadImage(with: first.icon) { (cache, error) in
-                guard error == nil else {
-                    print(error!)
-                    return
-                }
-                DispatchQueue.main.async {
-                    this.weatherImageView.image = cache//cache?.image(withIdentifier: id!)
-                }
-            }
+//            networkService.downloadImage(with: first.icon) { (cache, error) in
+//                guard error == nil else {
+//                    print(error!)
+//                    return
+//                }
+//                DispatchQueue.main.async {
+//                    this.weatherImageView.image = cache//cache?.image(withIdentifier: id!)
+//                }
+//            }
         }
     }
 }

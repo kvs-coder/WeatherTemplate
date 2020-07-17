@@ -19,6 +19,10 @@
 		1753D2AB24C22E5E005F4E70 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 1753D2AA24C22E5E005F4E70 /* AlamofireImage */; };
 		1753D2AD24C23818005F4E70 /* ForecastData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1753D2AC24C23818005F4E70 /* ForecastData.swift */; };
 		1753D2AF24C238C1005F4E70 /* ParseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1753D2AE24C238C1005F4E70 /* ParseProtocol.swift */; };
+		1753D2B224C23B62005F4E70 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1753D2B124C23B62005F4E70 /* RxSwift */; };
+		1753D2B624C23B62005F4E70 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 1753D2B524C23B62005F4E70 /* RxRelay */; };
+		1753D2B824C23B62005F4E70 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 1753D2B724C23B62005F4E70 /* RxCocoa */; };
+		1753D2BA24C23B62005F4E70 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 1753D2B924C23B62005F4E70 /* RxBlocking */; };
 		17A5853E24C1DAB7004747BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5853D24C1DAB7004747BB /* AppDelegate.swift */; };
 		17A5854024C1DAB7004747BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5853F24C1DAB7004747BB /* SceneDelegate.swift */; };
 		17A5854224C1DAB7004747BB /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5854124C1DAB7004747BB /* WeatherViewController.swift */; };
@@ -81,8 +85,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				17154C4C24C210FB0053E297 /* SnapKit in Frameworks */,
+				1753D2BA24C23B62005F4E70 /* RxBlocking in Frameworks */,
 				1753D2AB24C22E5E005F4E70 /* AlamofireImage in Frameworks */,
+				1753D2B624C23B62005F4E70 /* RxRelay in Frameworks */,
+				1753D2B224C23B62005F4E70 /* RxSwift in Frameworks */,
 				17154C4124C209380053E297 /* SwiftyJSON in Frameworks */,
+				1753D2B824C23B62005F4E70 /* RxCocoa in Frameworks */,
 				17154C3E24C209040053E297 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -220,6 +228,10 @@
 				17154C4024C209380053E297 /* SwiftyJSON */,
 				17154C4B24C210FB0053E297 /* SnapKit */,
 				1753D2AA24C22E5E005F4E70 /* AlamofireImage */,
+				1753D2B124C23B62005F4E70 /* RxSwift */,
+				1753D2B524C23B62005F4E70 /* RxRelay */,
+				1753D2B724C23B62005F4E70 /* RxCocoa */,
+				1753D2B924C23B62005F4E70 /* RxBlocking */,
 			);
 			productName = SwiftWeatherTemplate;
 			productReference = 17A5853A24C1DAB7004747BB /* SwiftWeatherTemplate.app */;
@@ -298,6 +310,7 @@
 				17154C3F24C209380053E297 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				17154C4A24C210FB0053E297 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				1753D2A924C22E5E005F4E70 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
+				1753D2B024C23B62005F4E70 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = 17A5853B24C1DAB7004747BB /* Products */;
 			projectDirPath = "";
@@ -739,6 +752,14 @@
 				minimumVersion = 4.1.0;
 			};
 		};
+		1753D2B024C23B62005F4E70 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -761,6 +782,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1753D2A924C22E5E005F4E70 /* XCRemoteSwiftPackageReference "AlamofireImage" */;
 			productName = AlamofireImage;
+		};
+		1753D2B124C23B62005F4E70 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1753D2B024C23B62005F4E70 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		1753D2B524C23B62005F4E70 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1753D2B024C23B62005F4E70 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		1753D2B724C23B62005F4E70 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1753D2B024C23B62005F4E70 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		1753D2B924C23B62005F4E70 /* RxBlocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1753D2B024C23B62005F4E70 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxBlocking;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
