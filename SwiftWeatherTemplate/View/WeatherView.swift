@@ -9,7 +9,12 @@
 import UIKit
 import SnapKit
 
-class WeatherView: UIView {
+final class WeatherView: UIView {
+    private let backgroundImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "background"))
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
     let generalInfoStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .leading
@@ -42,13 +47,13 @@ class WeatherView: UIView {
     let weatherImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "sunny")
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
 
     convenience init() {
         self.init(frame: .zero)
-        backgroundColor = .white
+        addSubview(backgroundImageView)
         addSubview(generalInfoStackView)
         generalInfoStackView.addArrangedSubview(cityLabel)
         generalInfoStackView.addArrangedSubview(dayLabel)
@@ -68,6 +73,9 @@ class WeatherView: UIView {
     }
 
     private func makeConstraints() {
+        backgroundImageView.snp.makeConstraints { (maker) in
+            maker.left.top.right.bottom.equalToSuperview()
+        }
         generalInfoStackView.snp.makeConstraints { (maker) in
             maker.left.top.right.equalTo(layoutMarginsGuide).inset(5)
             maker.height.equalToSuperview().dividedBy(3.0)

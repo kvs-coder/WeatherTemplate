@@ -7,3 +7,5 @@
 */
 "celcios" = "Cº";
 "fahrenheit" = "Fº";
+"weatherView" = "Today's weather";
+"forecastView" = "Forecast for 5 days";

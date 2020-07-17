@@ -8,11 +8,9 @@
 
 import UIKit
 
-class ForecastViewController: UIViewController {
+class ForecastViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 }
 
@@ -20,7 +18,8 @@ extension ForecastViewController: ViewControllerProtocol {
     static func make() -> ForecastViewController {
         let forecastViewController = ForecastViewController()
         forecastViewController.tabBarItem = UITabBarItem(
-            tabBarSystemItem: .downloads,
+            title: NSLocalizedString("forecastView", comment: "the vc name"),
+            image: UIImage(named: "forecast"),
             tag: 1
         )
         return forecastViewController

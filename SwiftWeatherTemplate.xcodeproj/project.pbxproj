@@ -11,10 +11,12 @@
 		17154C3E24C209040053E297 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 17154C3D24C209040053E297 /* Alamofire */; };
 		17154C4124C209380053E297 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 17154C4024C209380053E297 /* SwiftyJSON */; };
 		17154C4424C20C060053E297 /* ForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17154C4324C20C060053E297 /* ForecastViewController.swift */; };
-		17154C4724C20C430053E297 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17154C4624C20C430053E297 /* Weather.swift */; };
+		17154C4724C20C430053E297 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17154C4624C20C430053E297 /* WeatherData.swift */; };
 		17154C4924C20F3F0053E297 /* ViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17154C4824C20F3F0053E297 /* ViewControllerProtocol.swift */; };
 		17154C4C24C210FB0053E297 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 17154C4B24C210FB0053E297 /* SnapKit */; };
 		17154C4E24C2110C0053E297 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17154C4D24C2110C0053E297 /* WeatherView.swift */; };
+		1753D2A824C22330005F4E70 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1753D2A724C22330005F4E70 /* NetworkService.swift */; };
+		1753D2AB24C22E5E005F4E70 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 1753D2AA24C22E5E005F4E70 /* AlamofireImage */; };
 		17A5853E24C1DAB7004747BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5853D24C1DAB7004747BB /* AppDelegate.swift */; };
 		17A5854024C1DAB7004747BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5853F24C1DAB7004747BB /* SceneDelegate.swift */; };
 		17A5854224C1DAB7004747BB /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5854124C1DAB7004747BB /* WeatherViewController.swift */; };
@@ -47,9 +49,10 @@
 /* Begin PBXFileReference section */
 		170C4FEC24C2124C006341AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17154C4324C20C060053E297 /* ForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewController.swift; sourceTree = "<group>"; };
-		17154C4624C20C430053E297 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		17154C4624C20C430053E297 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		17154C4824C20F3F0053E297 /* ViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocol.swift; sourceTree = "<group>"; };
 		17154C4D24C2110C0053E297 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
+		1753D2A724C22330005F4E70 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		17A5853A24C1DAB7004747BB /* SwiftWeatherTemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftWeatherTemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17A5853D24C1DAB7004747BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17A5853F24C1DAB7004747BB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +77,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17154C4C24C210FB0053E297 /* SnapKit in Frameworks */,
+				1753D2AB24C22E5E005F4E70 /* AlamofireImage in Frameworks */,
 				17154C4124C209380053E297 /* SwiftyJSON in Frameworks */,
 				17154C3E24C209040053E297 /* Alamofire in Frameworks */,
 			);
@@ -99,7 +103,7 @@
 		17154C4524C20C390053E297 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				17154C4624C20C430053E297 /* Weather.swift */,
+				17154C4624C20C430053E297 /* WeatherData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -111,6 +115,23 @@
 				17154C4D24C2110C0053E297 /* WeatherView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		1726C19324C21D88006C9FA6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				17A5854124C1DAB7004747BB /* WeatherViewController.swift */,
+				17154C4324C20C060053E297 /* ForecastViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1753D2A624C22320005F4E70 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				1753D2A724C22330005F4E70 /* NetworkService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		17A5853124C1DAB7004747BB = {
@@ -140,12 +161,12 @@
 		17A5853C24C1DAB7004747BB /* SwiftWeatherTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				17154C4F24C211170053E297 /* View */,
+				1753D2A624C22320005F4E70 /* Service */,
 				17154C4524C20C390053E297 /* Model */,
+				17154C4F24C211170053E297 /* View */,
+				1726C19324C21D88006C9FA6 /* Controller */,
 				17A5853D24C1DAB7004747BB /* AppDelegate.swift */,
 				17A5853F24C1DAB7004747BB /* SceneDelegate.swift */,
-				17A5854124C1DAB7004747BB /* WeatherViewController.swift */,
-				17154C4324C20C060053E297 /* ForecastViewController.swift */,
 				17A5854624C1DAB7004747BB /* Assets.xcassets */,
 				17A5854824C1DAB7004747BB /* LaunchScreen.storyboard */,
 				17A5854B24C1DAB7004747BB /* Info.plist */,
@@ -192,6 +213,7 @@
 				17154C3D24C209040053E297 /* Alamofire */,
 				17154C4024C209380053E297 /* SwiftyJSON */,
 				17154C4B24C210FB0053E297 /* SnapKit */,
+				1753D2AA24C22E5E005F4E70 /* AlamofireImage */,
 			);
 			productName = SwiftWeatherTemplate;
 			productReference = 17A5853A24C1DAB7004747BB /* SwiftWeatherTemplate.app */;
@@ -269,6 +291,7 @@
 				17154C3C24C209040053E297 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				17154C3F24C209380053E297 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				17154C4A24C210FB0053E297 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				1753D2A924C22E5E005F4E70 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 			);
 			productRefGroup = 17A5853B24C1DAB7004747BB /* Products */;
 			projectDirPath = "";
@@ -338,11 +361,12 @@
 			files = (
 				17154C4924C20F3F0053E297 /* ViewControllerProtocol.swift in Sources */,
 				17A5854224C1DAB7004747BB /* WeatherViewController.swift in Sources */,
+				1753D2A824C22330005F4E70 /* NetworkService.swift in Sources */,
 				17154C4424C20C060053E297 /* ForecastViewController.swift in Sources */,
 				17A5853E24C1DAB7004747BB /* AppDelegate.swift in Sources */,
 				17A5854024C1DAB7004747BB /* SceneDelegate.swift in Sources */,
 				17154C4E24C2110C0053E297 /* WeatherView.swift in Sources */,
-				17154C4724C20C430053E297 /* Weather.swift in Sources */,
+				17154C4724C20C430053E297 /* WeatherData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -699,6 +723,14 @@
 				minimumVersion = 5.0.1;
 			};
 		};
+		1753D2A924C22E5E005F4E70 /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/AlamofireImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -716,6 +748,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 17154C4A24C210FB0053E297 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		1753D2AA24C22E5E005F4E70 /* AlamofireImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1753D2A924C22E5E005F4E70 /* XCRemoteSwiftPackageReference "AlamofireImage" */;
+			productName = AlamofireImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
