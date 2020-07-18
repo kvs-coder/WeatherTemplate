@@ -38,7 +38,7 @@ class ForecastViewController: UIViewController {
                 let data = forecastData,
                 error == nil
                 else {
-                    print(error!)
+                    logError(error!.localizedDescription)
                     return
             }
             this.bindUI(with: data, networkService)
@@ -69,7 +69,7 @@ class ForecastViewController: UIViewController {
                 if let first = element.weather.first {
                     networkService.downloadImage(with: first.icon) { (image, error) in
                         guard error == nil else {
-                            print(error!)
+                            logError(error!.localizedDescription)
                             return
                         }
                         let temperature = "\(Int(round(element.main.temp)).description)Cº"

@@ -29,6 +29,7 @@
 		1753D2B824C23B62005F4E70 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 1753D2B724C23B62005F4E70 /* RxCocoa */; };
 		1753D2BA24C23B62005F4E70 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 1753D2B924C23B62005F4E70 /* RxBlocking */; };
 		17827B0324C38203009165F1 /* Extensions+Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17827B0224C38203009165F1 /* Extensions+Notification.swift */; };
+		17827B0724C38B48009165F1 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17827B0624C38B48009165F1 /* Log.swift */; };
 		17A5853E24C1DAB7004747BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5853D24C1DAB7004747BB /* AppDelegate.swift */; };
 		17A5854024C1DAB7004747BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5853F24C1DAB7004747BB /* SceneDelegate.swift */; };
 		17A5854224C1DAB7004747BB /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5854124C1DAB7004747BB /* WeatherViewController.swift */; };
@@ -73,6 +74,7 @@
 		1753D2AC24C23818005F4E70 /* ForecastData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastData.swift; sourceTree = "<group>"; };
 		1753D2AE24C238C1005F4E70 /* ParseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseProtocol.swift; sourceTree = "<group>"; };
 		17827B0224C38203009165F1 /* Extensions+Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+Notification.swift"; sourceTree = "<group>"; };
+		17827B0624C38B48009165F1 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		17A5853A24C1DAB7004747BB /* SwiftWeatherTemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftWeatherTemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17A5853D24C1DAB7004747BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17A5853F24C1DAB7004747BB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -163,6 +165,24 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		17827B0424C38B1E009165F1 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				170AFD3024C3330300BCFD46 /* Extensions+Date.swift */,
+				170AFD3424C3418C00BCFD46 /* Extensions+UIViewController.swift */,
+				17827B0224C38203009165F1 /* Extensions+Notification.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		17827B0524C38B2B009165F1 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				17827B0624C38B48009165F1 /* Log.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
 		17A5853124C1DAB7004747BB = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +210,8 @@
 		17A5853C24C1DAB7004747BB /* SwiftWeatherTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				17827B0524C38B2B009165F1 /* Config */,
+				17827B0424C38B1E009165F1 /* Extensions */,
 				1753D2A624C22320005F4E70 /* Service */,
 				17154C4524C20C390053E297 /* Model */,
 				17154C4F24C211170053E297 /* View */,
@@ -199,9 +221,6 @@
 				17A5854624C1DAB7004747BB /* Assets.xcassets */,
 				17A5854824C1DAB7004747BB /* LaunchScreen.storyboard */,
 				17A5854B24C1DAB7004747BB /* Info.plist */,
-				170AFD3024C3330300BCFD46 /* Extensions+Date.swift */,
-				170AFD3424C3418C00BCFD46 /* Extensions+UIViewController.swift */,
-				17827B0224C38203009165F1 /* Extensions+Notification.swift */,
 			);
 			path = SwiftWeatherTemplate;
 			sourceTree = "<group>";
@@ -404,6 +423,7 @@
 				17154C4424C20C060053E297 /* ForecastViewController.swift in Sources */,
 				170AFD3124C3330300BCFD46 /* Extensions+Date.swift in Sources */,
 				17A5853E24C1DAB7004747BB /* AppDelegate.swift in Sources */,
+				17827B0724C38B48009165F1 /* Log.swift in Sources */,
 				1753D2AF24C238C1005F4E70 /* ParseProtocol.swift in Sources */,
 				17A5854024C1DAB7004747BB /* SceneDelegate.swift in Sources */,
 				17827B0324C38203009165F1 /* Extensions+Notification.swift in Sources */,

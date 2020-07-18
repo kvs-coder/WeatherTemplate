@@ -17,7 +17,7 @@ final class Decoder {
             let data = try decoder.decode(T.self, from: rawData)
             return data
         } catch {
-            print(error)
+            logError(error.localizedDescription)
         }
         return nil
     }

@@ -63,7 +63,7 @@ class WeatherViewController: UIViewController {
             if let icon = data.weather.first?.icon {
                 networkService.downloadImage(with: icon) { (cache, error) in
                     guard error == nil else {
-                        print(error!)
+                        logError(error!.localizedDescription)
                         return
                     }
                     completionHandler(data, cache, error)

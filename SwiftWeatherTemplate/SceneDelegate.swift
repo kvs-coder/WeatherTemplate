@@ -30,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     return
                 }
                 if path.status == .satisfied {
-                    print("good")
+                    logDebug("path's good")
                 } else {
                     let alert = viewController.makeNoConnectionAlert()
                     viewController.present(
