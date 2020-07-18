@@ -38,7 +38,8 @@ class ForecastViewController: UIViewController {
                 let data = forecastData,
                 error == nil
                 else {
-                return
+                    print(error!)
+                    return
             }
             this.bindUI(with: data, networkService)
         }
