@@ -11,6 +11,6 @@ import SwiftyJSON
 
 protocol ParseProtocol {
     associatedtype Parseble where Parseble: Codable
-    
+
     static func parse(from json: JSON) -> Parseble?
 }

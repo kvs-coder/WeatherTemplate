@@ -71,8 +71,10 @@ final class WeatherView: UIView {
 
         makeConstraints()
     }
+}
 
-    private func makeConstraints() {
+extension WeatherView: ViewProtocol {
+    func makeConstraints() {
         backgroundImageView.snp.makeConstraints { (maker) in
             maker.left.top.right.bottom.equalToSuperview()
         }

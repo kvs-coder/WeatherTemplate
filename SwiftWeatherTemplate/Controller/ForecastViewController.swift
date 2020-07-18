@@ -10,11 +10,23 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class ForecastViewController: UITableViewController {
+class ForecastViewController: UIViewController {
+    typealias Cell = UITableViewCell
+
+    private let forecastView = ForecastView()
+    private unowned var tableView: UITableView {
+        return forecastView.tableView
+    }
+    private let cellId = "cell"
     private let disposeBag = DisposeBag()
+
+    override func loadView() {
+        view = forecastView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.register(Cell.self, forCellReuseIdentifier: cellId)
         let networkService = NetworkService()
         networkService.requestForecast(latitude: 50.0, longitude: 50.0) { [weak self] forecastData, error in
             guard let this = self else {
@@ -24,19 +36,19 @@ class ForecastViewController: UITableViewController {
                 print(error!)
                 return
             }
-            this.tableView.delegate = nil
-            this.tableView.dataSource = nil
-            this.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
             Observable
                 .just(data.list)
                 .bind(to: this.tableView.rx.items(
-                    cellIdentifier: "cell",
-                    cellType: UITableViewCell.self)
-                ) { (row, element, cell) in
+                    cellIdentifier: this.cellId,
+                    cellType: Cell.self)
+                ) { (_, element, cell) in
                     if let first = element.weather.first {
                         networkService.downloadImage(with: first.icon) { (image, _) in
+                            let temperature = element.main.temp
+                            let date = Date(timeIntervalSince1970: element.dt)
+                                .formatted(with: "MMM dd, yyyy HH:mm")
+                            cell.textLabel?.text = "\(temperature) on \(date)"
                             cell.imageView?.image = image
-                            cell.textLabel?.text = "\(element.main.temp) @ row \(Date(timeIntervalSince1970: element.dt))"
                         }
                     }
             }
@@ -45,6 +57,7 @@ class ForecastViewController: UITableViewController {
     }
 }
 
+// - MARK: ViewControllerProtocol
 extension ForecastViewController: ViewControllerProtocol {
     static func make() -> ForecastViewController {
         let forecastViewController = ForecastViewController()
