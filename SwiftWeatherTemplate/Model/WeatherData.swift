@@ -13,26 +13,29 @@ struct WeatherData: Codable {
     struct Main: Codable {
         let temp: Double
     }
-
     struct Weather: Codable {
+        let main: String
         let icon: String
+    }
+    struct Coordinate: Codable {
+        let lat: Double
+        let lon: Double
+    }
+    struct City: Codable {
+        let name: String?
     }
 
     let main: Main
     let dt: TimeInterval
+    let coord: Coordinate?
     let weather: [Weather]
+    let name: String?
+    let city: City?
 }
 
 extension WeatherData: ParseProtocol {
     static func parse(from json: JSON) -> WeatherData? {
-        let decoder = JSONDecoder()
-        do {
-            let rawData = try json.rawData()
-            let weatherData = try decoder.decode(WeatherData.self, from: rawData)
-            return weatherData
-        } catch {
-            print(error)
-        }
-        return nil
+        print(json)
+        return Decoder().decode(from: json)
     }
 }

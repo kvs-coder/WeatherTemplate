@@ -15,15 +15,7 @@ struct ForecastData: Codable {
 
 extension ForecastData: ParseProtocol {
     static func parse(from json: JSON) -> ForecastData? {
-        let decoder = JSONDecoder()
-        do {
-            print(json)
-            let rawData = try json.rawData()
-            let forecastData = try decoder.decode(ForecastData.self, from: rawData)
-            return forecastData
-        } catch {
-            print(error)
-        }
-        return nil
+        print(json)
+        return Decoder().decode(from: json)
     }
 }

@@ -25,16 +25,6 @@ final class WeatherView: UIView {
     }()
     let cityLabel = UILabel()
     let dayLabel = UILabel()
-    let degreeStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.alignment = .center
-        stackView.axis = .horizontal
-        stackView.spacing = 5.0
-        stackView.distribution = .fillEqually
-        return stackView
-    }()
-    let degreeLabel = UILabel()
-    let degreeSwitch = UISwitch()
     let weatherInfoStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .center
@@ -46,38 +36,25 @@ final class WeatherView: UIView {
     let temperatureLabel = UILabel()
     let weatherImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "sunny")
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
 
     convenience init() {
         self.init(frame: .zero)
-        addSubview(backgroundImageView)
+        backgroundColor = .white
         addSubview(generalInfoStackView)
         generalInfoStackView.addArrangedSubview(cityLabel)
         generalInfoStackView.addArrangedSubview(dayLabel)
-        generalInfoStackView.addArrangedSubview(degreeStackView)
-        degreeStackView.addArrangedSubview(degreeLabel)
-        degreeStackView.addArrangedSubview(degreeSwitch)
         addSubview(weatherInfoStackView)
         weatherInfoStackView.addArrangedSubview(temperatureLabel)
         weatherInfoStackView.addArrangedSubview(weatherImageView)
-
-        degreeLabel.text = "C0"
-        cityLabel.text = "MOSOCW"
-        dayLabel.text = "TODAY"
-        temperatureLabel.text = "34C"
-
         makeConstraints()
     }
 }
 
 extension WeatherView: ViewProtocol {
     func makeConstraints() {
-        backgroundImageView.snp.makeConstraints { (maker) in
-            maker.left.top.right.bottom.equalToSuperview()
-        }
         generalInfoStackView.snp.makeConstraints { (maker) in
             maker.left.top.right.equalTo(layoutMarginsGuide).inset(5)
             maker.height.equalToSuperview().dividedBy(3.0)

@@ -7,12 +7,24 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class WeatherViewController: UIViewController {
     private let weatherView = WeatherView()
     private unowned var weatherImageView: UIImageView {
         return weatherView.weatherImageView
     }
+    private unowned var cityLabel: UILabel {
+        return weatherView.cityLabel
+    }
+    private unowned var dayLabel: UILabel {
+        return weatherView.dayLabel
+    }
+    private unowned var temperatureLabel: UILabel {
+        return weatherView.temperatureLabel
+    }
+    private let disposeBag = DisposeBag()
 
     override func loadView() {
         view = weatherView
@@ -29,18 +41,34 @@ class WeatherViewController: UIViewController {
                 print(error!)
                 return
             }
-            guard let first = weatherData?.weather.first else {
+            guard let data = weatherData else {
                 return
             }
-//            networkService.downloadImage(with: first.icon) { (cache, error) in
-//                guard error == nil else {
-//                    print(error!)
-//                    return
-//                }
-//                DispatchQueue.main.async {
-//                    this.weatherImageView.image = cache//cache?.image(withIdentifier: id!)
-//                }
-//            }
+            Observable
+                .just(data.dt)
+                .map({ Date(timeIntervalSince1970: $0).formatted(with: Date.iso)})
+                .bind(to: this.dayLabel.rx.text)
+                .disposed(by: this.disposeBag)
+            Observable
+                .just(data.name)
+                .bind(to: this.cityLabel.rx.text)
+                .disposed(by: this.disposeBag)
+            Observable
+                .just(data.main.temp)
+                .map({ "\(Int(round($0)).description)Cº" })
+                .bind(to: this.temperatureLabel.rx.text)
+                .disposed(by: this.disposeBag)
+            if let icon = data.weather.first?.icon {
+                networkService.downloadImage(with: icon) { (cache, error) in
+                    guard error == nil else {
+                        print(error!)
+                        return
+                    }
+                    Observable.just(cache)
+                        .bind(to: this.weatherImageView.rx.image)
+                        .disposed(by: this.disposeBag)
+                }
+            }
         }
     }
 }

@@ -9,6 +9,8 @@
 import Foundation
 
 extension Date {
+    static let iso = "MMM dd, yyyy HH:mm"
+
     func formatted(
         with format: String,
         timezone: TimeZone = TimeZone.current

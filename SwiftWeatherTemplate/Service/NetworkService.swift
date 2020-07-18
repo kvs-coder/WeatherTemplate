@@ -77,7 +77,10 @@ class NetworkService {
     }
 
     @discardableResult
-    private func makeRequest(enpoint: String, parameters: [String: Any]) -> DataRequest {
+    private func makeRequest(
+        enpoint: String,
+        parameters: [String: Any]
+    ) -> DataRequest {
         return AF.request(
             "\(API.baseUrl)\(enpoint)",
             parameters: parameters,
