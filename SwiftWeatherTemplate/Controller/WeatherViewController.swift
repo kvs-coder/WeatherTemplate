@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Network
 
 class WeatherViewController: UIViewController {
     private let weatherView = WeatherView()
@@ -25,6 +26,7 @@ class WeatherViewController: UIViewController {
         return weatherView.temperatureLabel
     }
     private let disposeBag = DisposeBag()
+    let monitor = NWPathMonitor()
 
     override func loadView() {
         view = weatherView
@@ -32,6 +34,12 @@ class WeatherViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        monitorConnection()
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
+    }
+
+    private func requestWeatherData() {
         let networkService = NetworkService()
         networkService.requestWeather(
             latitude: 50.2,
@@ -85,5 +93,15 @@ extension WeatherViewController: ViewControllerProtocol {
             tag: 0
         )
         return weatherViewController
+    }
+
+    func monitorConnection() {
+        monitor.pathUpdateHandler = { [weak self] path in
+            if path.status == .satisfied {
+                self?.requestWeatherData()
+            } else {
+                self?.showNoConnectionAlert()
+            }
+        }
     }
 }

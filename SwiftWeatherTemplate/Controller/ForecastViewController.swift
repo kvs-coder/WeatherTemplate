@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Network
 
 class ForecastViewController: UIViewController {
     typealias Cell = UITableViewCell
@@ -27,6 +28,10 @@ class ForecastViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(Cell.self, forCellReuseIdentifier: cellId)
+        requestForecastData()
+    }
+
+    private func requestForecastData() {
         let networkService = NetworkService()
         networkService.requestForecast(
             latitude: 50.2,
