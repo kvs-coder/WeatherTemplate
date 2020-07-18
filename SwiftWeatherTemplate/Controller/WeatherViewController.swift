@@ -34,50 +34,64 @@ class WeatherViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        monitorConnection()
-        let queue = DispatchQueue(label: "Monitor")
-        monitor.start(queue: queue)
+        requestWeatherData { [weak self] (weatherData, image, error) in
+            guard let this = self else {
+                return
+            }
+            guard
+                let data = weatherData,
+                error == nil
+                else {
+                return
+            }
+            this.bindUI(with: data, image: image)
+        }
     }
 
-    private func requestWeatherData() {
+    private func requestWeatherData(
+        completionHandler: @escaping (WeatherData?, UIImage?, Error?) -> Void
+    ) {
         let networkService = NetworkService()
         networkService.requestWeather(
             latitude: 50.2,
             longitude: 50.2
-        ) { [weak self] weatherData, error in
-            guard let this = self, error == nil else {
-                print(error!)
+        ) { weatherData, error in
+            guard let data = weatherData, error == nil else {
+                completionHandler(nil, nil, error)
                 return
             }
-            guard let data = weatherData else {
-                return
-            }
-            Observable
-                .just(data.dt)
-                .map({ Date(timeIntervalSince1970: $0).formatted(with: Date.iso)})
-                .bind(to: this.dayLabel.rx.text)
-                .disposed(by: this.disposeBag)
-            Observable
-                .just(data.name)
-                .bind(to: this.cityLabel.rx.text)
-                .disposed(by: this.disposeBag)
-            Observable
-                .just(data.main.temp)
-                .map({ "\(Int(round($0)).description)Cº" })
-                .bind(to: this.temperatureLabel.rx.text)
-                .disposed(by: this.disposeBag)
             if let icon = data.weather.first?.icon {
                 networkService.downloadImage(with: icon) { (cache, error) in
                     guard error == nil else {
                         print(error!)
                         return
                     }
-                    Observable.just(cache)
-                        .bind(to: this.weatherImageView.rx.image)
-                        .disposed(by: this.disposeBag)
+                    completionHandler(data, cache, error)
                 }
+            } else {
+                completionHandler(data, nil, error)
             }
         }
+    }
+
+    private func bindUI(with data: WeatherData, image: UIImage?) {
+        Observable
+            .just(data.dt)
+            .map({ Date(timeIntervalSince1970: $0).formatted(with: Date.iso)})
+            .bind(to: dayLabel.rx.text)
+            .disposed(by: disposeBag)
+        Observable
+            .just(data.name)
+            .bind(to: cityLabel.rx.text)
+            .disposed(by: disposeBag)
+        Observable
+            .just(data.main.temp)
+            .map({ "\(Int(round($0)).description)Cº" })
+            .bind(to: temperatureLabel.rx.text)
+            .disposed(by: disposeBag)
+        Observable.just(image)
+            .bind(to: weatherImageView.rx.image)
+            .disposed(by: disposeBag)
     }
 }
 
@@ -93,15 +107,5 @@ extension WeatherViewController: ViewControllerProtocol {
             tag: 0
         )
         return weatherViewController
-    }
-
-    func monitorConnection() {
-        monitor.pathUpdateHandler = { [weak self] path in
-            if path.status == .satisfied {
-                self?.requestWeatherData()
-            } else {
-                self?.showNoConnectionAlert()
-            }
-        }
     }
 }

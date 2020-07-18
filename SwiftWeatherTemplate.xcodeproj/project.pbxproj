@@ -28,6 +28,7 @@
 		1753D2B624C23B62005F4E70 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 1753D2B524C23B62005F4E70 /* RxRelay */; };
 		1753D2B824C23B62005F4E70 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 1753D2B724C23B62005F4E70 /* RxCocoa */; };
 		1753D2BA24C23B62005F4E70 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 1753D2B924C23B62005F4E70 /* RxBlocking */; };
+		17827B0324C38203009165F1 /* Extensions+Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17827B0224C38203009165F1 /* Extensions+Notification.swift */; };
 		17A5853E24C1DAB7004747BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5853D24C1DAB7004747BB /* AppDelegate.swift */; };
 		17A5854024C1DAB7004747BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5853F24C1DAB7004747BB /* SceneDelegate.swift */; };
 		17A5854224C1DAB7004747BB /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5854124C1DAB7004747BB /* WeatherViewController.swift */; };
@@ -71,6 +72,7 @@
 		1753D2A724C22330005F4E70 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		1753D2AC24C23818005F4E70 /* ForecastData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastData.swift; sourceTree = "<group>"; };
 		1753D2AE24C238C1005F4E70 /* ParseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseProtocol.swift; sourceTree = "<group>"; };
+		17827B0224C38203009165F1 /* Extensions+Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+Notification.swift"; sourceTree = "<group>"; };
 		17A5853A24C1DAB7004747BB /* SwiftWeatherTemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftWeatherTemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17A5853D24C1DAB7004747BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17A5853F24C1DAB7004747BB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				17A5854B24C1DAB7004747BB /* Info.plist */,
 				170AFD3024C3330300BCFD46 /* Extensions+Date.swift */,
 				170AFD3424C3418C00BCFD46 /* Extensions+UIViewController.swift */,
+				17827B0224C38203009165F1 /* Extensions+Notification.swift */,
 			);
 			path = SwiftWeatherTemplate;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 				17A5853E24C1DAB7004747BB /* AppDelegate.swift in Sources */,
 				1753D2AF24C238C1005F4E70 /* ParseProtocol.swift in Sources */,
 				17A5854024C1DAB7004747BB /* SceneDelegate.swift in Sources */,
+				17827B0324C38203009165F1 /* Extensions+Notification.swift in Sources */,
 				17154C4E24C2110C0053E297 /* WeatherView.swift in Sources */,
 				1753D2AD24C23818005F4E70 /* ForecastData.swift in Sources */,
 				170AFD3524C3418C00BCFD46 /* Extensions+UIViewController.swift in Sources */,

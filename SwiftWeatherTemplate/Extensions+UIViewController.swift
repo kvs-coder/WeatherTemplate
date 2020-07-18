@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIViewController {
-    func showNoConnectionAlert() {
+    func makeNoConnectionAlert() -> UIAlertController {
         let alert = UIAlertController(
             title: NSLocalizedString(
                 "alertNoConnectionHeader",
@@ -28,8 +28,6 @@ extension UIViewController {
                 handler: nil
             )
         )
-        DispatchQueue.main.async {
-            self.present(alert, animated: true, completion: nil)
-        }
+        return alert
     }
 }

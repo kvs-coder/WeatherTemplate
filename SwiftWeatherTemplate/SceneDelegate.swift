@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Network
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
+    private let monitor = NWPathMonitor()
 
     func scene(
         _ scene: UIScene,
@@ -18,12 +20,35 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
+        window?.rootViewController = makeRootViewController()
+        window?.makeKeyAndVisible()
+        monitor.pathUpdateHandler = { [weak self] path in
+            DispatchQueue.main.async {
+                guard
+                    let viewController = self?.window?.rootViewController
+                    else {
+                    return
+                }
+                if path.status == .satisfied {
+                    print("good")
+                } else {
+                    let alert = viewController.makeNoConnectionAlert()
+                    viewController.present(
+                        alert,
+                        animated: true,
+                        completion: nil
+                    )
+                }
+            }
+        }
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
+    }
+
+    private func makeRootViewController() -> UINavigationController {
         let tabBarViewController = UITabBarController()
         tabBarViewController.addChild(WeatherViewController.make())
         tabBarViewController.addChild(ForecastViewController.make())
-        window?.rootViewController = UINavigationController(
-            rootViewController: tabBarViewController
-        )
-        window?.makeKeyAndVisible()
+        return UINavigationController(rootViewController: tabBarViewController)
     }
 }
