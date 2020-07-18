@@ -29,8 +29,8 @@ class ForecastViewController: UIViewController {
         tableView.register(Cell.self, forCellReuseIdentifier: cellId)
         let networkService = NetworkService()
         networkService.requestForecast(
-            latitude: 50.0,
-            longitude: 50.0
+            latitude: 50.2,
+            longitude: 50.2
         ) { [weak self] forecastData, error in
             guard let this = self else {
                 return
@@ -43,14 +43,18 @@ class ForecastViewController: UIViewController {
                     return
             }
             Observable
-                .just(data.list)
+                .of(data.list)
                 .bind(to: this.tableView.rx.items(
                     cellIdentifier: this.cellId,
                     cellType: Cell.self)
                 ) { (_, element, cell) in
                     if let first = element.weather.first {
-                        networkService.downloadImage(with: first.icon) { (image, _) in
-                            let temperature = element.main.temp
+                        networkService.downloadImage(with: first.icon) { (image, error) in
+                            guard error == nil else {
+                                print(error!)
+                                return
+                            }
+                            let temperature = "\(Int(round(element.main.temp)).description)Cº"
                             let date = Date(timeIntervalSince1970: element.dt)
                                 .formatted(with: Date.iso)
                             cell.textLabel?.text = "\(temperature) on \(date)"

@@ -34,8 +34,8 @@ class WeatherViewController: UIViewController {
         super.viewDidLoad()
         let networkService = NetworkService()
         networkService.requestWeather(
-            latitude: 50.0,
-            longitude: 50.0
+            latitude: 50.2,
+            longitude: 50.2
         ) { [weak self] weatherData, error in
             guard let this = self, error == nil else {
                 print(error!)
@@ -77,7 +77,10 @@ extension WeatherViewController: ViewControllerProtocol {
     static func make() -> WeatherViewController {
         let weatherViewController = WeatherViewController()
         weatherViewController.tabBarItem = UITabBarItem(
-            title: NSLocalizedString("weatherView", comment: "the vc name"),
+            title: NSLocalizedString(
+                "weatherView",
+                comment: "the vc name"
+            ),
             image: UIImage(named: "weather"),
             tag: 0
         )

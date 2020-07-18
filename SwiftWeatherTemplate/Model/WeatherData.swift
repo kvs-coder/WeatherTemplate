@@ -10,19 +10,15 @@ import Foundation
 import SwiftyJSON
 
 struct WeatherData: Codable {
+    struct Weather: Codable {
+        let icon: String
+    }
     struct Main: Codable {
         let temp: Double
-    }
-    struct Weather: Codable {
-        let main: String
-        let icon: String
     }
     struct Coordinate: Codable {
         let lat: Double
         let lon: Double
-    }
-    struct City: Codable {
-        let name: String?
     }
 
     let main: Main
@@ -30,7 +26,6 @@ struct WeatherData: Codable {
     let coord: Coordinate?
     let weather: [Weather]
     let name: String?
-    let city: City?
 }
 
 extension WeatherData: ParseProtocol {

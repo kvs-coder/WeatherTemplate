@@ -9,3 +9,5 @@
 "fahrenheit" = "Fº";
 "weatherView" = "Today's weather";
 "forecastView" = "Forecast for 5 days";
+"alertNoConnectionHeader" = "Warning";
+"alertNoConnectionBody" = "No connection to the internet, try later";
