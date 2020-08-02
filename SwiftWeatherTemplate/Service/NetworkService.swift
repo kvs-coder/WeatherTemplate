@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 import AlamofireImage
 import SwiftyJSON
+import RxSwift
 
 class NetworkService {
     enum API {
@@ -36,26 +37,30 @@ class NetworkService {
             }
         }
     }
-
     func requestWeather(
         latitude: Double,
-        longitude: Double,
-        completionHandler: @escaping (WeatherData?, Error?) -> Void
-    ) {
-        makeRequest(enpoint: "weather", parameters: setParameters(
-            latitude: latitude,
-            longitude: longitude
-        )).responseJSON { (response) in
-            switch response.result {
-            case .success(let value):
-                let weatherData = WeatherData.parse(from: JSON(value))
-                completionHandler(weatherData, nil)
-            case .failure(let error):
-                completionHandler(nil, error)
+        longitude: Double
+    ) -> Observable<WeatherData> {
+        return Observable.create { [weak self] (observer) -> Disposable in
+            guard let this = self else {
+                return Disposables.create()
             }
+            this.makeRequest(enpoint: "weather", parameters: this.setParameters(
+                latitude: latitude,
+                longitude: longitude
+            )).responseJSON { (response) in
+                switch response.result {
+                case .success(let value):
+                    if let weatherData = WeatherData.parse(from: JSON(value)) {
+                        observer.onNext(weatherData)
+                    }
+                case .failure(let error):
+                    observer.onError(error)
+                }
+            }
+            return Disposables.create()
         }
     }
-
     func downloadImage(with id: String, completionHandler: @escaping (Image?, Error?) -> Void) {
         let imageDownloader = ImageDownloader(
             configuration: ImageDownloader.defaultURLSessionConfiguration(),
@@ -87,7 +92,6 @@ class NetworkService {
             encoding: URLEncoding.queryString
         )
     }
-
     private func setParameters(
         latitude: Double,
         longitude: Double

@@ -28,6 +28,8 @@
 		1753D2B624C23B62005F4E70 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 1753D2B524C23B62005F4E70 /* RxRelay */; };
 		1753D2B824C23B62005F4E70 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 1753D2B724C23B62005F4E70 /* RxCocoa */; };
 		1753D2BA24C23B62005F4E70 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 1753D2B924C23B62005F4E70 /* RxBlocking */; };
+		1773243724D69C2E002E1105 /* ForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1773243624D69C2E002E1105 /* ForecastViewModel.swift */; };
+		1773243924D69C4A002E1105 /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1773243824D69C4A002E1105 /* ViewModelProtocol.swift */; };
 		17827B0324C38203009165F1 /* Extensions+Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17827B0224C38203009165F1 /* Extensions+Notification.swift */; };
 		17827B0724C38B48009165F1 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17827B0624C38B48009165F1 /* Log.swift */; };
 		17A5853E24C1DAB7004747BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5853D24C1DAB7004747BB /* AppDelegate.swift */; };
@@ -40,6 +42,10 @@
 		17A5856E24C1DAE2004747BB /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 17A5856D24C1DAE2004747BB /* .swiftlint.yml */; };
 		17A5857124C1DAEA004747BB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 17A5856F24C1DAEA004747BB /* README.md */; };
 		17A5857224C1DAEA004747BB /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 17A5857024C1DAEA004747BB /* LICENSE */; };
+		17CAB93D24D6151A000ECCB8 /* Extensions+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CAB93C24D6151A000ECCB8 /* Extensions+Double.swift */; };
+		17CAB93F24D61916000ECCB8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CAB93E24D61916000ECCB8 /* Location.swift */; };
+		17CAB94124D61A09000ECCB8 /* Extensions-Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CAB94024D61A09000ECCB8 /* Extensions-Notification.swift */; };
+		17CAB94424D694C7000ECCB8 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CAB94324D694C7000ECCB8 /* WeatherViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +79,8 @@
 		1753D2A724C22330005F4E70 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		1753D2AC24C23818005F4E70 /* ForecastData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastData.swift; sourceTree = "<group>"; };
 		1753D2AE24C238C1005F4E70 /* ParseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseProtocol.swift; sourceTree = "<group>"; };
+		1773243624D69C2E002E1105 /* ForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModel.swift; sourceTree = "<group>"; };
+		1773243824D69C4A002E1105 /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
 		17827B0224C38203009165F1 /* Extensions+Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+Notification.swift"; sourceTree = "<group>"; };
 		17827B0624C38B48009165F1 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		17A5853A24C1DAB7004747BB /* SwiftWeatherTemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftWeatherTemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,6 +99,10 @@
 		17A5856D24C1DAE2004747BB /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		17A5856F24C1DAEA004747BB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		17A5857024C1DAEA004747BB /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		17CAB93C24D6151A000ECCB8 /* Extensions+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+Double.swift"; sourceTree = "<group>"; };
+		17CAB93E24D61916000ECCB8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		17CAB94024D61A09000ECCB8 /* Extensions-Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions-Notification.swift"; sourceTree = "<group>"; };
+		17CAB94324D694C7000ECCB8 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +144,7 @@
 				17154C4624C20C430053E297 /* WeatherData.swift */,
 				1753D2AC24C23818005F4E70 /* ForecastData.swift */,
 				1753D2AE24C238C1005F4E70 /* ParseProtocol.swift */,
+				17CAB93E24D61916000ECCB8 /* Location.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -139,6 +152,7 @@
 		17154C4F24C211170053E297 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1726C19324C21D88006C9FA6 /* Controller */,
 				17154C4D24C2110C0053E297 /* WeatherView.swift */,
 				170AFD2C24C32B9A00BCFD46 /* ForecastView.swift */,
 				170AFD2E24C32BE900BCFD46 /* ViewProtocol.swift */,
@@ -171,6 +185,8 @@
 				170AFD3024C3330300BCFD46 /* Extensions+Date.swift */,
 				170AFD3424C3418C00BCFD46 /* Extensions+UIViewController.swift */,
 				17827B0224C38203009165F1 /* Extensions+Notification.swift */,
+				17CAB93C24D6151A000ECCB8 /* Extensions+Double.swift */,
+				17CAB94024D61A09000ECCB8 /* Extensions-Notification.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -214,8 +230,8 @@
 				17827B0424C38B1E009165F1 /* Extensions */,
 				1753D2A624C22320005F4E70 /* Service */,
 				17154C4524C20C390053E297 /* Model */,
+				17CAB94224D694AD000ECCB8 /* ViewModel */,
 				17154C4F24C211170053E297 /* View */,
-				1726C19324C21D88006C9FA6 /* Controller */,
 				17A5853D24C1DAB7004747BB /* AppDelegate.swift */,
 				17A5853F24C1DAB7004747BB /* SceneDelegate.swift */,
 				17A5854624C1DAB7004747BB /* Assets.xcassets */,
@@ -241,6 +257,16 @@
 				17A5856124C1DAB7004747BB /* Info.plist */,
 			);
 			path = SwiftWeatherTemplateUITests;
+			sourceTree = "<group>";
+		};
+		17CAB94224D694AD000ECCB8 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1773243824D69C4A002E1105 /* ViewModelProtocol.swift */,
+				17CAB94324D694C7000ECCB8 /* WeatherViewModel.swift */,
+				1773243624D69C2E002E1105 /* ForecastViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -419,16 +445,22 @@
 				17A5854224C1DAB7004747BB /* WeatherViewController.swift in Sources */,
 				170AFD2D24C32B9A00BCFD46 /* ForecastView.swift in Sources */,
 				1753D2A824C22330005F4E70 /* NetworkService.swift in Sources */,
+				1773243924D69C4A002E1105 /* ViewModelProtocol.swift in Sources */,
+				17CAB94124D61A09000ECCB8 /* Extensions-Notification.swift in Sources */,
 				170AFD3324C335A200BCFD46 /* Decoder.swift in Sources */,
 				17154C4424C20C060053E297 /* ForecastViewController.swift in Sources */,
 				170AFD3124C3330300BCFD46 /* Extensions+Date.swift in Sources */,
 				17A5853E24C1DAB7004747BB /* AppDelegate.swift in Sources */,
 				17827B0724C38B48009165F1 /* Log.swift in Sources */,
+				17CAB94424D694C7000ECCB8 /* WeatherViewModel.swift in Sources */,
 				1753D2AF24C238C1005F4E70 /* ParseProtocol.swift in Sources */,
 				17A5854024C1DAB7004747BB /* SceneDelegate.swift in Sources */,
 				17827B0324C38203009165F1 /* Extensions+Notification.swift in Sources */,
 				17154C4E24C2110C0053E297 /* WeatherView.swift in Sources */,
 				1753D2AD24C23818005F4E70 /* ForecastData.swift in Sources */,
+				17CAB93F24D61916000ECCB8 /* Location.swift in Sources */,
+				1773243724D69C2E002E1105 /* ForecastViewModel.swift in Sources */,
+				17CAB93D24D6151A000ECCB8 /* Extensions+Double.swift in Sources */,
 				170AFD3524C3418C00BCFD46 /* Extensions+UIViewController.swift in Sources */,
 				170AFD2F24C32BE900BCFD46 /* ViewProtocol.swift in Sources */,
 				17154C4724C20C430053E297 /* WeatherData.swift in Sources */,

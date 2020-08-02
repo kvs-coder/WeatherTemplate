@@ -9,8 +9,10 @@
 import UIKit
 
 protocol ViewControllerProtocol {
+    associatedtype View where View: ViewProtocol
+    associatedtype ViewModel where ViewModel: ViewModelProtocol
     associatedtype Controller where Controller: UIViewController
 
     ///Factory method
-    static func make() -> Controller
+    static func make(view: View, viewModel: ViewModel) -> Controller
 }

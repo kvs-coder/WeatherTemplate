@@ -47,8 +47,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     private func makeRootViewController() -> UINavigationController {
         let tabBarViewController = UITabBarController()
-        tabBarViewController.addChild(WeatherViewController.make())
-        tabBarViewController.addChild(ForecastViewController.make())
+        tabBarViewController.addChild(WeatherViewController.make(
+            view: WeatherView(),
+            viewModel: WeatherViewModel()
+            )
+        )
+        tabBarViewController.addChild(ForecastViewController.make(
+            view: ForecastView(),
+            viewModel: ForecastViewModel()
+            )
+        )
         return UINavigationController(rootViewController: tabBarViewController)
     }
 }
