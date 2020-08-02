@@ -18,4 +18,6 @@ protocol ViewControllerProtocol {
 
     ///Factory method
     static func make(view: View, viewModel: ViewModel) -> Controller
+
+    func bindUI()
 }

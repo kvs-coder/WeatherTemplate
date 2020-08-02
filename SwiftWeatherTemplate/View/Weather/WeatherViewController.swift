@@ -68,25 +68,6 @@ class WeatherViewController: UIViewController {
             }
         )
     }
-
-    private func bindUI() {
-        weather
-            .map({ $0.day })
-            .bind(to: dayLabel.rx.text)
-            .disposed(by: disposeBag)
-        weather
-            .map({ $0.temperature })
-            .bind(to: temperatureLabel.rx.text)
-            .disposed(by: disposeBag)
-        weather
-            .map({ $0.city })
-            .bind(to: cityLabel.rx.text)
-            .disposed(by: disposeBag)
-        weather
-            .map({ $0.imageData?.asImage })
-            .bind(to: weatherImageView.rx.image)
-            .disposed(by: disposeBag)
-    }
 }
 
 extension WeatherViewController: ViewControllerProtocol {
@@ -107,5 +88,24 @@ extension WeatherViewController: ViewControllerProtocol {
         weatherViewController.baseView = view
         weatherViewController.viewModel = viewModel
         return weatherViewController
+    }
+
+    func bindUI() {
+        weather
+            .map({ $0.day })
+            .bind(to: dayLabel.rx.text)
+            .disposed(by: disposeBag)
+        weather
+            .map({ $0.temperature })
+            .bind(to: temperatureLabel.rx.text)
+            .disposed(by: disposeBag)
+        weather
+            .map({ $0.city })
+            .bind(to: cityLabel.rx.text)
+            .disposed(by: disposeBag)
+        weather
+            .map({ $0.imageData?.asImage })
+            .bind(to: weatherImageView.rx.image)
+            .disposed(by: disposeBag)
     }
 }

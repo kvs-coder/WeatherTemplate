@@ -66,25 +66,6 @@ class ForecastViewController: UIViewController {
             object: nil
         )
     }
-
-    private func bindUI() {
-        forecast
-            .bind(to: tableView.rx.items(
-                cellIdentifier: cellId,
-                cellType: Cell.self)
-            ) { (_, element, cell) in
-                guard
-                    let day = element.day,
-                    let temp = element.temperature,
-                    let data = element.imageData
-                    else {
-                        return
-                }
-                cell.textLabel?.text = "\(temp) on \(day)"
-                cell.imageView?.image = UIImage(data: data)
-        }
-        .disposed(by: disposeBag)
-    }
 }
 
 // - MARK: ViewControllerProtocol
@@ -106,5 +87,24 @@ extension ForecastViewController: ViewControllerProtocol {
         forecastViewController.baseView = view
         forecastViewController.viewModel = viewModel
         return forecastViewController
+    }
+
+    func bindUI() {
+        forecast
+            .bind(to: tableView.rx.items(
+                cellIdentifier: cellId,
+                cellType: Cell.self)
+            ) { (_, element, cell) in
+                guard
+                    let day = element.day,
+                    let temp = element.temperature,
+                    let data = element.imageData
+                    else {
+                        return
+                }
+                cell.textLabel?.text = "\(temp) on \(day)"
+                cell.imageView?.image = UIImage(data: data)
+        }
+        .disposed(by: disposeBag)
     }
 }
