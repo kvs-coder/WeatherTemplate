@@ -13,25 +13,25 @@ import Network
 import SwiftyJSON
 
 class WeatherViewController: UIViewController {
-    var weatherView: WeatherView!
+    var baseView: WeatherView!
     var viewModel: WeatherViewModel!
 
     private unowned var weatherImageView: UIImageView {
-        return weatherView.weatherImageView
+        return baseView.weatherImageView
     }
     private unowned var cityLabel: UILabel {
-        return weatherView.cityLabel
+        return baseView.cityLabel
     }
     private unowned var dayLabel: UILabel {
-        return weatherView.dayLabel
+        return baseView.dayLabel
     }
     private unowned var temperatureLabel: UILabel {
-        return weatherView.temperatureLabel
+        return baseView.temperatureLabel
     }
     private let disposeBag = DisposeBag()
 
     override func loadView() {
-        view = weatherView
+        view = baseView
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,15 +60,15 @@ class WeatherViewController: UIViewController {
         }
         viewModel.requestWeatherData(
             location: location,
-            onOutputReceived: { [unowned self] output in
+            completionHandler: { [unowned self] output in
                 self.dayLabel.text = output.day
                 self.temperatureLabel.text = output.temperature
                 self.cityLabel.text = output.city
-            }, onImgaeDataReceived: { [unowned self] imageData in
-                if let data = imageData {
+                if let data = output.imageData {
                     self.weatherImageView.image = UIImage(data: data)
                 }
-        })
+            }
+        )
     }
 }
 
@@ -87,7 +87,7 @@ extension WeatherViewController: ViewControllerProtocol {
             image: UIImage(named: "weather"),
             tag: 0
         )
-        weatherViewController.weatherView = view
+        weatherViewController.baseView = view
         weatherViewController.viewModel = viewModel
         return weatherViewController
     }

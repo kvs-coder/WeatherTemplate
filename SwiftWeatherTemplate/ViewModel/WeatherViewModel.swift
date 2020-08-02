@@ -11,20 +11,20 @@ import RxSwift
 
 class WeatherViewModel: ViewModelProtocol {
     struct Input {
-        var location: Location
+        let location: Location
     }
     struct Output {
         var day: String?
         var city: String?
         var temperature: String?
+        var imageData: Data?
     }
 
     private let disposeBag = DisposeBag()
 
     func requestWeatherData(
         location: Location,
-        onOutputReceived: @escaping (Output) -> Void,
-        onImgaeDataReceived: @escaping (Data?) -> Void
+        completionHandler: @escaping (Output) -> Void
     ) {
         let input = Input(location: location)
         let networkService = NetworkService()
@@ -37,20 +37,20 @@ class WeatherViewModel: ViewModelProtocol {
                     let date = Date(timeIntervalSince1970: weatherData.dt)
                         .formatted(with: Date.iso)
                     let temp = "\(weatherData.main.temp.roundedToInt().description)Cº"
-                    let output = Output(
-                        day: date,
-                        city:
-                        weatherData.name,
-                        temperature: temp
-                    )
-                    onOutputReceived(output)
                     if let icon = weatherData.weather.first?.icon {
                         networkService.downloadImage(with: icon) { (cache, error) in
                             guard error == nil else {
                                 logError(error!.localizedDescription)
                                 return
                             }
-                            onImgaeDataReceived(cache?.pngData())
+                            let output = Output(
+                                day: date,
+                                city:
+                                weatherData.name,
+                                temperature: temp,
+                                imageData: cache
+                            )
+                            completionHandler(output)
                         }
                     }
                 }, onError: { (error) in

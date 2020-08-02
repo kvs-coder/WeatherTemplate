@@ -21,33 +21,37 @@ class NetworkService {
 
     func requestForecast(
         latitude: Double,
-        longitude: Double,
-        completionHandler: @escaping (ForecastData?, Error?) -> Void
-    ) {
-        makeRequest(enpoint: "forecast", parameters: setParameters(
-            latitude: latitude,
-            longitude: longitude
-        )).responseJSON { (response) in
-            switch response.result {
-            case .success(let value):
-                let weatherData = ForecastData.parse(from: JSON(value))
-                completionHandler(weatherData, nil)
-            case .failure(let error):
-                completionHandler(nil, error)
+        longitude: Double
+    ) -> Observable<ForecastData> {
+        return Observable.create { [unowned self] (observer) -> Disposable in
+            self.makeRequest(
+                enpoint: "forecast",
+                parameters: self.setParameters(
+                    latitude: latitude,
+                    longitude: longitude
+            )).responseJSON { (response) in
+                switch response.result {
+                case .success(let value):
+                    if let weatherData = ForecastData.parse(from: JSON(value)) {
+                        observer.onNext(weatherData)
+                    }
+                case .failure(let error):
+                    observer.onError(error)
+                }
             }
+            return Disposables.create()
         }
     }
     func requestWeather(
         latitude: Double,
         longitude: Double
     ) -> Observable<WeatherData> {
-        return Observable.create { [weak self] (observer) -> Disposable in
-            guard let this = self else {
-                return Disposables.create()
-            }
-            this.makeRequest(enpoint: "weather", parameters: this.setParameters(
-                latitude: latitude,
-                longitude: longitude
+        return Observable.create { [unowned self] (observer) -> Disposable in
+            self.makeRequest(
+                enpoint: "weather",
+                parameters: self.setParameters(
+                    latitude: latitude,
+                    longitude: longitude
             )).responseJSON { (response) in
                 switch response.result {
                 case .success(let value):
@@ -61,7 +65,7 @@ class NetworkService {
             return Disposables.create()
         }
     }
-    func downloadImage(with id: String, completionHandler: @escaping (Image?, Error?) -> Void) {
+    func downloadImage(with id: String, completionHandler: @escaping (Data?, Error?) -> Void) {
         let imageDownloader = ImageDownloader(
             configuration: ImageDownloader.defaultURLSessionConfiguration(),
             downloadPrioritization: .fifo,
@@ -74,7 +78,7 @@ class NetworkService {
         imageDownloader.download(request) { response in
             switch response.result {
             case .success(let image):
-                completionHandler(image, nil)
+                completionHandler(image.pngData(), nil)
             case .failure(let error):
                 completionHandler(nil, error)
             }

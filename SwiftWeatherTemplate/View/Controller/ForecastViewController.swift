@@ -15,18 +15,18 @@ import SwiftyJSON
 class ForecastViewController: UIViewController {
     typealias Cell = UITableViewCell
 
-    var forecastView: ForecastView!
+    var baseView: ForecastView!
     var viewModel: ForecastViewModel!
 
     private unowned var tableView: UITableView {
-        return forecastView.tableView
+        return baseView.tableView
     }
     private let cellId = "cell"
     private let disposeBag = DisposeBag()
     let monitor = NWPathMonitor()
 
     override func loadView() {
-        view = forecastView
+        view = baseView
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,22 +48,12 @@ class ForecastViewController: UIViewController {
             return
         }
         let networkService = NetworkService()
-        requestForecastData(
+        viewModel.requestForecastData(
             networkService,
-            location: location,
-            completionHandler: { [weak self] (forecastData, error) in
-                guard let this = self else {
-                    return
-                }
-                guard
-                    let data = forecastData,
-                    error == nil
-                    else {
-                        logError(error!.localizedDescription)
-                        return
-                }
-                this.bindUI(with: data, networkService)
-        })
+            location: location
+        ) { [unowned self] (output) in
+            self.bindUI(with: output)
+        }
     }
 
     deinit {
@@ -74,40 +64,22 @@ class ForecastViewController: UIViewController {
         )
     }
 
-    private func requestForecastData(
-        _ networkService: NetworkService,
-        location: Location,
-        completionHandler: @escaping (ForecastData?, Error?) -> Void
-    ) {
-        networkService.requestForecast(
-            latitude: location.latitude,
-            longitude: location.longitude,
-            completionHandler: completionHandler
-        )
-    }
-    private func bindUI(
-        with data: ForecastData,
-        _ networkService: NetworkService
-    ) {
+    private func bindUI(with data: [ViewModel.Output]) {
         Observable
-            .of(data.list)
+            .of(data)
             .bind(to: tableView.rx.items(
                 cellIdentifier: cellId,
                 cellType: Cell.self)
             ) { (_, element, cell) in
-                if let first = element.weather.first {
-                    networkService.downloadImage(with: first.icon) { (image, error) in
-                        guard error == nil else {
-                            logError(error!.localizedDescription)
-                            return
-                        }
-                        let temperature = "\(element.main.temp.roundedToInt().description)Cº"
-                        let date = Date(timeIntervalSince1970: element.dt)
-                            .formatted(with: Date.iso)
-                        cell.textLabel?.text = "\(temperature) on \(date)"
-                        cell.imageView?.image = image
-                    }
+                guard
+                    let day = element.day,
+                    let temp = element.temperature,
+                    let data = element.imageData
+                    else {
+                        return
                 }
+                cell.textLabel?.text = "\(temp) on \(day)"
+                cell.imageView?.image = UIImage(data: data)
         }
         .disposed(by: disposeBag)
     }
@@ -129,7 +101,7 @@ extension ForecastViewController: ViewControllerProtocol {
             image: UIImage(named: "forecast"),
             tag: 1
         )
-        forecastViewController.forecastView = view
+        forecastViewController.baseView = view
         forecastViewController.viewModel = viewModel
         return forecastViewController
     }
