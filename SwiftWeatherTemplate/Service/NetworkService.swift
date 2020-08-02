@@ -13,12 +13,6 @@ import SwiftyJSON
 import RxSwift
 
 class NetworkService {
-    enum API {
-        static let key = "5dfac62572f7baa9d93575ba3662c22b"
-        static let baseUrl = "https://api.openweathermap.org/data/2.5/"
-        static let imageUrl = "http://openweathermap.org/img/wn/"
-    }
-
     func requestForecast(
         latitude: Double,
         longitude: Double
@@ -71,8 +65,10 @@ class NetworkService {
             downloadPrioritization: .fifo,
             imageCache: AutoPurgingImageCache()
         )
-        guard let url = URL(string:"\(API.imageUrl)\(id)@2x.png") else {
-            return
+        guard
+            let url = URL(string:"http://openweathermap.org/img/wn/\(id)@2x.png")
+            else {
+                return
         }
         let request = URLRequest(url: url)
         imageDownloader.download(request) { response in
@@ -91,7 +87,7 @@ class NetworkService {
         parameters: [String: Any]
     ) -> DataRequest {
         return AF.request(
-            "\(API.baseUrl)\(enpoint)",
+            "https://api.openweathermap.org/data/2.5/\(enpoint)",
             parameters: parameters,
             encoding: URLEncoding.queryString
         )
@@ -104,7 +100,7 @@ class NetworkService {
                  "lat": latitude,
                  "lon": longitude,
                  "units": "metric",
-                 "appid": API.key
+                 "appid": Environment.apiKey
              ]
     }
 }

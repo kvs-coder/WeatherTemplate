@@ -1,0 +1,12 @@
+//
+//  Development.xcconfig
+//  SwiftWeatherTemplate
+//
+//  Created by Florian on 02.08.20.
+//  Copyright © 2020 Florian. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+API_KEY = 5dfac62572f7baa9d93575ba3662c22b

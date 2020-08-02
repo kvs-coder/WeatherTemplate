@@ -1,61 +1,73 @@
 //
 //  Log.swift
-//  SwiftWeatherTemplate
+//  ModuleCommons
 //
-//  Created by Florian on 18.07.20.
-//  Copyright © 2020 Florian. All rights reserved.
+//  Created by Florian on 01.11.19.
+//  Copyright © 2019 Victor Kachalov. All rights reserved.
 //
 
 import Foundation
 
 enum Level: String {
-    case info
-    case debug
-    case warning
-    case error
+    case inf
+    case dbg
+    case wrg
+    case err
 }
 
-func logDebug(
-    _ message: String,
+public func logDebug(
+    _ message: Any?,
     file: String = #file,
     line: Int = #line,
     function: String = #function
 ) {
-    #if DEBUG
+    #if DEVELOPMENT
     log(
         message: message,
-        level: .debug,
+        level: .dbg,
         file: file,
         line: line,
         function: function
     )
     #endif
 }
-
-func logInfo(
-    _ message: String,
+public func logInfo(
+    _ message: Any?,
     file: String = #file,
     line: Int = #line,
     function: String = #function
 ) {
     log(
         message: message,
-        level: .info,
+        level: .inf,
         file: file,
         line: line,
         function: function
     )
 }
-
-func logError(
-    _ message: String,
+public func logError(
+    _ message: Any?,
     file: String = #file,
     line: Int = #line,
     function: String = #function
 ) {
     log(
         message: message,
-        level: .error,
+        level: .err,
+        file: file,
+        line: line,
+        function: function
+    )
+}
+public func logWarning(
+    _ message: Any?,
+    file: String = #file,
+    line: Int = #line,
+    function: String = #function
+) {
+    log(
+        message: message,
+        level: .wrg,
         file: file,
         line: line,
         function: function
@@ -63,7 +75,7 @@ func logError(
 }
 
 private func log(
-    message: String,
+    message: Any?,
     level: Level,
     file: String,
     line: Int,
@@ -72,5 +84,5 @@ private func log(
     let logLevel = level.rawValue.uppercased()
     let logTime = Date()
     let place = (file as NSString).lastPathComponent
-    print("[\(logLevel) - \(logTime)]: [\(place):\(line) - \(function)]\n \(message)")
+    print("[\(logLevel)/\(logTime)]: [\(place):\(line) #\(function)] \(message ?? "")")
 }
