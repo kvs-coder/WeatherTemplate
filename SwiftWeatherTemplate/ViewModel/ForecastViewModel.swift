@@ -35,7 +35,8 @@ class ForecastViewModel: ViewModelProtocol {
                 onNext: { (forecastData) in
                     let group = DispatchGroup()
                     var outputs = [Output]()
-                    forecastData.list.forEach { (element) in
+                    let sorted = forecastData.list.sorted(by: { $1.dt > $0.dt })
+                    sorted.forEach { (element) in
                         if let first = element.weather.first {
                             group.enter()
                             networkService.downloadImage(with: first.icon) { (imageData, error) in

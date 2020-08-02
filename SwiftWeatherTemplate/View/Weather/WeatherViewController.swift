@@ -13,6 +13,7 @@ import Network
 import SwiftyJSON
 
 class WeatherViewController: UIViewController {
+    typealias Weather = ViewModel.Output
     var baseView: WeatherView!
     var viewModel: WeatherViewModel!
 
@@ -29,12 +30,14 @@ class WeatherViewController: UIViewController {
         return baseView.temperatureLabel
     }
     private let disposeBag = DisposeBag()
+    private let weather = BehaviorRelay(value: Weather())
 
     override func loadView() {
         view = baseView
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindUI()
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(locationUpdated),
@@ -61,14 +64,28 @@ class WeatherViewController: UIViewController {
         viewModel.requestWeatherData(
             location: location,
             completionHandler: { [unowned self] output in
-                self.dayLabel.text = output.day
-                self.temperatureLabel.text = output.temperature
-                self.cityLabel.text = output.city
-                if let data = output.imageData {
-                    self.weatherImageView.image = UIImage(data: data)
-                }
+                self.weather.accept(output)
             }
         )
+    }
+
+    private func bindUI() {
+        weather
+            .map({ $0.day })
+            .bind(to: dayLabel.rx.text)
+            .disposed(by: disposeBag)
+        weather
+            .map({ $0.temperature })
+            .bind(to: temperatureLabel.rx.text)
+            .disposed(by: disposeBag)
+        weather
+            .map({ $0.city })
+            .bind(to: cityLabel.rx.text)
+            .disposed(by: disposeBag)
+        weather
+            .map({ $0.imageData?.asImage })
+            .bind(to: weatherImageView.rx.image)
+            .disposed(by: disposeBag)
     }
 }
 

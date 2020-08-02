@@ -13,6 +13,7 @@ import Network
 import SwiftyJSON
 
 class ForecastViewController: UIViewController {
+    typealias Forecast = [ForecastViewModel.Output]
     typealias Cell = UITableViewCell
 
     var baseView: ForecastView!
@@ -22,8 +23,9 @@ class ForecastViewController: UIViewController {
         return baseView.tableView
     }
     private let cellId = "cell"
+
     private let disposeBag = DisposeBag()
-    let monitor = NWPathMonitor()
+    private let forecast = BehaviorRelay(value: Forecast())
 
     override func loadView() {
         view = baseView
@@ -31,6 +33,7 @@ class ForecastViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(Cell.self, forCellReuseIdentifier: cellId)
+        bindUI()
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(locationUpdated),
@@ -52,7 +55,7 @@ class ForecastViewController: UIViewController {
             networkService,
             location: location
         ) { [unowned self] (output) in
-            self.bindUI(with: output)
+            self.forecast.accept(output)
         }
     }
 
@@ -64,9 +67,8 @@ class ForecastViewController: UIViewController {
         )
     }
 
-    private func bindUI(with data: [ViewModel.Output]) {
-        Observable
-            .of(data)
+    private func bindUI() {
+        forecast
             .bind(to: tableView.rx.items(
                 cellIdentifier: cellId,
                 cellType: Cell.self)
