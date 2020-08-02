@@ -23,7 +23,7 @@ final class ForecastView: UIView {
 extension ForecastView: ViewProtocol {
     func makeConstraints() {
         tableView.snp.makeConstraints { (maker) in
-            maker.left.top.right.bottom.equalTo(layoutMarginsGuide)
+            maker.left.top.right.bottom.equalToSuperview()
         }
     }
 }
