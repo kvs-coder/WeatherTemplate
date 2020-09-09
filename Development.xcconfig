@@ -10,3 +10,4 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 
 API_KEY = 5dfac62572f7baa9d93575ba3662c22b
+API_URL = http:/$()/api.openweathermap.org/data/2.5/

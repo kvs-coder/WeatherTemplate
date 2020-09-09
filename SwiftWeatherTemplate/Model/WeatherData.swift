@@ -26,6 +26,9 @@ struct WeatherData: Codable {
     let coord: Coordinate?
     let weather: [Weather]
     let name: String?
+    var iconUrl: URL? {
+        return URL(string:"http://openweathermap.org/img/wn/\(weather[0].icon)@2x.png")
+    }
 }
 
 extension WeatherData: ParseProtocol {

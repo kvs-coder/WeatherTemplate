@@ -14,16 +14,16 @@ final class ForecastView: UIView {
 
     convenience init() {
         self.init(frame: .zero)
-        backgroundColor = .white
+        tableView.adoptBackgroundMode()
         addSubview(tableView)
         makeConstraints()
     }
 }
-
+// MARK: - ViewProtocol
 extension ForecastView: ViewProtocol {
     func makeConstraints() {
-        tableView.snp.makeConstraints { (maker) in
-            maker.left.top.right.bottom.equalToSuperview()
+        tableView.snp.makeConstraints {
+            $0.left.top.right.bottom.equalToSuperview()
         }
     }
 }

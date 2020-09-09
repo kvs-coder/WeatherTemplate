@@ -42,7 +42,8 @@ final class WeatherView: UIView {
 
     convenience init() {
         self.init(frame: .zero)
-        backgroundColor = .white
+        // Set up the support of dark/light mode
+        adoptMode()
         addSubview(generalInfoStackView)
         generalInfoStackView.addArrangedSubview(cityLabel)
         generalInfoStackView.addArrangedSubview(dayLabel)

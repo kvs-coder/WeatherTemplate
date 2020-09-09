@@ -11,6 +11,7 @@ import Foundation
 final class Environment {
     enum Keys: String {
         case apiKey = "API_KEY"
+        case apiUrl = "API_URL"
     }
 
     static let apiKey: String = {
@@ -18,6 +19,14 @@ final class Environment {
             let apiKey = infoDictionary[Keys.apiKey.rawValue] as? String
             else {
                 fatalError("API Key not set in plist for this environment")
+        }
+        return apiKey
+    }()
+    static let apiUrl: String = {
+        guard
+            let apiKey = infoDictionary[Keys.apiUrl.rawValue] as? String
+            else {
+                fatalError("API Url not set in plist for this environment")
         }
         return apiKey
     }()

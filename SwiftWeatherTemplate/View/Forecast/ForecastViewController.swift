@@ -13,8 +13,7 @@ import Network
 import SwiftyJSON
 
 class ForecastViewController: UIViewController {
-    typealias Forecast = [ForecastViewModel.Output]
-    typealias Cell = UITableViewCell
+    typealias Cell = ForecastViewCell
 
     var baseView: ForecastView!
     var viewModel: ForecastViewModel!
@@ -23,9 +22,7 @@ class ForecastViewController: UIViewController {
         return baseView.tableView
     }
     private let cellId = "cell"
-
     private let disposeBag = DisposeBag()
-    private let forecast = BehaviorRelay(value: Forecast())
 
     override func loadView() {
         view = baseView
@@ -34,48 +31,23 @@ class ForecastViewController: UIViewController {
         super.viewDidLoad()
         tableView.register(Cell.self, forCellReuseIdentifier: cellId)
         bindUI()
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(locationUpdated),
-            name: NSNotification.Name.newLocationDetected,
-            object: nil
-        )
     }
-
-    @objc func locationUpdated(_ notification: Notification) {
-        guard let dictionary = notification.userInfo else {
-            return
-        }
-        let json = JSON(dictionary)
-        guard let location = Location.parse(from: json) else {
-            return
-        }
-        let networkService = NetworkService()
-        viewModel.requestForecastData(
-            networkService,
-            location: location
-        ) { [unowned self] (output) in
-            self.forecast.accept(output)
-        }
-    }
-
-    deinit {
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name.newLocationDetected,
-            object: nil
-        )
+    /// if user switched from dark mode to light
+    /// need to color view again
+    override func traitCollectionDidChange(
+        _ previousTraitCollection: UITraitCollection?
+    ) {
+        tableView.adoptBackgroundMode()
     }
 }
-
-// - MARK: ViewControllerProtocol
+// MARK: - ViewControllerProtocol
 extension ForecastViewController: ViewControllerProtocol {
     typealias View = ForecastView
     typealias ViewModel = ForecastViewModel
     typealias Controller = ForecastViewController
 
     static func make(
-        view: ForecastView,
+        baseView: ForecastView,
         viewModel: ForecastViewModel
     ) -> ForecastViewController {
         let forecastViewController = ForecastViewController()
@@ -84,26 +56,15 @@ extension ForecastViewController: ViewControllerProtocol {
             image: UIImage(named: "forecast"),
             tag: 1
         )
-        forecastViewController.baseView = view
+        forecastViewController.baseView = baseView
         forecastViewController.viewModel = viewModel
         return forecastViewController
     }
 
     func bindUI() {
-        forecast
-            .bind(to: tableView.rx.items(
-                cellIdentifier: cellId,
-                cellType: Cell.self)
-            ) { (_, element, cell) in
-                guard
-                    let day = element.day,
-                    let temp = element.temperature,
-                    let data = element.imageData
-                    else {
-                        return
-                }
-                cell.textLabel?.text = "\(temp) on \(day)"
-                cell.imageView?.image = UIImage(data: data)
+        viewModel.output.forecast
+            .bind(to: tableView.rx.items(cellIdentifier: cellId, cellType: Cell.self)) { (_, weather, cell) in
+                cell.configure(weather: weather)
         }
         .disposed(by: disposeBag)
     }

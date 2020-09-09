@@ -11,27 +11,28 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 import RxSwift
+import UIKit
 
 class NetworkService {
     func requestForecast(
         latitude: Double,
         longitude: Double
-    ) -> Observable<ForecastData> {
+    ) -> Observable<[WeatherData]> {
         return Observable.create { [unowned self] (observer) -> Disposable in
             self.makeRequest(
                 enpoint: "forecast",
-                parameters: self.setParameters(
-                    latitude: latitude,
-                    longitude: longitude
-            )).responseJSON { (response) in
+                latitude: latitude,
+                longitude: longitude
+            ).responseJSON { (response) in
                 switch response.result {
                 case .success(let value):
-                    if let weatherData = ForecastData.parse(from: JSON(value)) {
-                        observer.onNext(weatherData)
-                    }
+                    let list = ForecastData.parse(from: JSON(value))?.list ?? []
+                    observer.onNext(list)
                 case .failure(let error):
-                    observer.onError(error)
+                    logError(error)
+                    observer.onNext([])
                 }
+                observer.onCompleted()
             }
             return Disposables.create()
         }
@@ -39,68 +40,69 @@ class NetworkService {
     func requestWeather(
         latitude: Double,
         longitude: Double
-    ) -> Observable<WeatherData> {
+    ) -> Observable<WeatherData?> {
         return Observable.create { [unowned self] (observer) -> Disposable in
             self.makeRequest(
                 enpoint: "weather",
-                parameters: self.setParameters(
-                    latitude: latitude,
-                    longitude: longitude
-            )).responseJSON { (response) in
+                latitude: latitude,
+                longitude: longitude
+            ).responseJSON { (response) in
                 switch response.result {
                 case .success(let value):
-                    if let weatherData = WeatherData.parse(from: JSON(value)) {
-                        observer.onNext(weatherData)
-                    }
+                    let weatherData = WeatherData.parse(from: JSON(value))
+                    observer.onNext(weatherData)
                 case .failure(let error):
-                    observer.onError(error)
+                    logError(error)
+                    observer.onNext(nil)
                 }
+                observer.onCompleted()
             }
             return Disposables.create()
         }
     }
-    func downloadImage(with id: String, completionHandler: @escaping (Data?, Error?) -> Void) {
-        let imageDownloader = ImageDownloader(
-            configuration: ImageDownloader.defaultURLSessionConfiguration(),
-            downloadPrioritization: .fifo,
-            imageCache: AutoPurgingImageCache()
-        )
-        guard
-            let url = URL(string:"http://openweathermap.org/img/wn/\(id)@2x.png")
-            else {
-                return
-        }
-        let request = URLRequest(url: url)
-        imageDownloader.download(request) { response in
-            switch response.result {
-            case .success(let image):
-                completionHandler(image.pngData(), nil)
-            case .failure(let error):
-                completionHandler(nil, error)
+    func downloadImage(url: URL?) -> Observable<UIImage?> {
+        return Observable.create { (observer) -> Disposable in
+            // Image will be always cached after download
+            let imageDownloader = ImageDownloader(
+                configuration: ImageDownloader.defaultURLSessionConfiguration(),
+                downloadPrioritization: .fifo,
+                imageCache: AutoPurgingImageCache()
+            )
+            if let url = url {
+                let request = URLRequest(url: url)
+                imageDownloader.download(request) { response in
+                    switch response.result {
+                    case .success(let image):
+                        observer.onNext(image)
+                    case .failure(let error):
+                        logError(error)
+                        observer.onNext(UIImage.placeholder)
+                    }
+                    observer.onCompleted()
+                }
+            } else {
+                observer.onNext(UIImage.placeholder)
             }
+            return Disposables.create()
         }
     }
 
     @discardableResult
     private func makeRequest(
         enpoint: String,
-        parameters: [String: Any]
+        latitude: Double,
+        longitude: Double
     ) -> DataRequest {
+        let parameters: [String : Any] = [
+            "lat": latitude,
+            "lon": longitude,
+            "units": "metric",
+            "appid": Environment.apiKey
+        ]
         return AF.request(
             "https://api.openweathermap.org/data/2.5/\(enpoint)",
             parameters: parameters,
             encoding: URLEncoding.queryString
         )
-    }
-    private func setParameters(
-        latitude: Double,
-        longitude: Double
-    ) -> [String: Any] {
-             return [
-                 "lat": latitude,
-                 "lon": longitude,
-                 "units": "metric",
-                 "appid": Environment.apiKey
-             ]
     }
 }

@@ -8,61 +8,44 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
+import Alamofire
 
-class ForecastViewModel: ViewModelProtocol {
-    struct Input {
-        let location: Location
-    }
-    struct Output {
-        var day: String?
-        var temperature: String?
-        var imageData: Data?
-    }
-
+final class ForecastViewModel {
+    let input = Input()
+    let output = Output()
     private let disposeBag = DisposeBag()
 
-    func requestForecastData(
-        _ networkService: NetworkService,
-        location: Location,
-        completionHandler: @escaping ([Output]) -> Void
-    ) {
-        let input = Input(location: location)
-        networkService.requestForecast(
-            latitude: input.location.latitude,
-            longitude: input.location.longitude
+    private init(_ networkService: NetworkService) {
+        input.location
+            .asObservable()
+            .throttle(RxTimeInterval.seconds(2), scheduler: MainScheduler.instance)
+            .flatMapLatest {
+                networkService.requestForecast(
+                    latitude: $0.latitude,
+                    longitude: $0.longitude
+                )
+        }
+        .bind(to: output.forecast)
+        .disposed(by: disposeBag)
+    }
+}
+// MARK: - ViewModelProtocol
+extension ForecastViewModel: ViewModelProtocol {
+    struct Input {
+        var location: BehaviorRelay<Location> = BehaviorRelay(
+            value: Location(
+                latitude: 51.0,
+                longitude: 51.0
+            )
         )
-            .subscribe(
-                onNext: { (forecastData) in
-                    let group = DispatchGroup()
-                    var outputs = [Output]()
-                    let sorted = forecastData.list.sorted(by: { $1.dt > $0.dt })
-                    sorted.forEach { (element) in
-                        if let first = element.weather.first {
-                            group.enter()
-                            networkService.downloadImage(with: first.icon) { (imageData, error) in
-                                guard error == nil else {
-                                    logError(error!.localizedDescription)
-                                    return
-                                }
-                                let temperature = "\(element.main.temp.roundedToInt().description)Cº"
-                                let date = Date(timeIntervalSince1970: element.dt)
-                                    .formatted(with: Date.iso)
-                                let output = Output(
-                                    day: date,
-                                    temperature: temperature,
-                                    imageData: imageData
-                                )
-                                outputs.append(output)
-                                group.leave()
-                            }
-                        }
-                    }
-                    group.notify(queue: .main) {
-                        completionHandler(outputs)
-                    }
-            }, onError: { (error) in
-                logError(error.localizedDescription)
-            })
-            .disposed(by: disposeBag)
+    }
+    struct Output {
+        var loadInProgress = BehaviorRelay(value: false)
+        var forecast = BehaviorRelay(value: [WeatherData]())
+    }
+
+    static func make(with service: NetworkService) -> ForecastViewModel {
+         return ForecastViewModel(service)
     }
 }

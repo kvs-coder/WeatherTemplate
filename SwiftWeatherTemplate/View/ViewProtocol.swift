@@ -9,5 +9,7 @@
 import Foundation
 
 protocol ViewProtocol {
+    /// Every view should be constrained
+    /// call this method directly in view's init()
     func makeConstraints()
 }

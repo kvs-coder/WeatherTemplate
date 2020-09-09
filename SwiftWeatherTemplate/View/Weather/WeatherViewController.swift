@@ -38,35 +38,13 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindUI()
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(locationUpdated),
-            name: NSNotification.Name.newLocationDetected,
-            object: nil
-        )
     }
-    deinit {
-        NotificationCenter.default.removeObserver(
-            self,
-            name: NSNotification.Name.newLocationDetected,
-            object: nil
-        )
-    }
-
-    @objc func locationUpdated(_ notification: Notification) {
-        guard let dictionary = notification.userInfo else {
-            return
-        }
-        let json = JSON(dictionary)
-        guard let location = Location.parse(from: json) else {
-            return
-        }
-        viewModel.requestWeatherData(
-            location: location,
-            completionHandler: { [unowned self] output in
-                self.weather.accept(output)
-            }
-        )
+    /// if user switched from dark mode to light
+    /// need to color view again
+    override func traitCollectionDidChange(
+        _ previousTraitCollection: UITraitCollection?
+    ) {
+        view.adoptMode()
     }
 }
 
@@ -75,7 +53,10 @@ extension WeatherViewController: ViewControllerProtocol {
     typealias ViewModel = WeatherViewModel
     typealias Controller = WeatherViewController
 
-    static func make(view: WeatherView, viewModel: WeatherViewModel) -> WeatherViewController {
+    static func make(
+        baseView: WeatherView,
+        viewModel: WeatherViewModel
+    ) -> WeatherViewController {
         let weatherViewController = WeatherViewController()
         weatherViewController.tabBarItem = UITabBarItem(
             title: NSLocalizedString(
@@ -85,26 +66,22 @@ extension WeatherViewController: ViewControllerProtocol {
             image: UIImage(named: "weather"),
             tag: 0
         )
-        weatherViewController.baseView = view
+        weatherViewController.baseView = baseView
         weatherViewController.viewModel = viewModel
         return weatherViewController
     }
 
     func bindUI() {
-        weather
-            .map({ $0.day })
-            .bind(to: dayLabel.rx.text)
-            .disposed(by: disposeBag)
-        weather
-            .map({ $0.temperature })
-            .bind(to: temperatureLabel.rx.text)
-            .disposed(by: disposeBag)
-        weather
-            .map({ $0.city })
+        viewModel.output.city
             .bind(to: cityLabel.rx.text)
             .disposed(by: disposeBag)
-        weather
-            .map({ $0.imageData?.asImage })
+        viewModel.output.temperature
+            .bind(to: temperatureLabel.rx.text)
+            .disposed(by: disposeBag)
+        viewModel.output.day
+            .bind(to: dayLabel.rx.text)
+            .disposed(by: disposeBag)
+        viewModel.output.image
             .bind(to: weatherImageView.rx.image)
             .disposed(by: disposeBag)
     }
