@@ -45,8 +45,8 @@
 		17A5854224C1DAB7004747BB /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5854124C1DAB7004747BB /* WeatherViewController.swift */; };
 		17A5854724C1DAB7004747BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17A5854624C1DAB7004747BB /* Assets.xcassets */; };
 		17A5854A24C1DAB7004747BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17A5854824C1DAB7004747BB /* LaunchScreen.storyboard */; };
-		17A5855524C1DAB7004747BB /* SwiftWeatherTemplateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5855424C1DAB7004747BB /* SwiftWeatherTemplateTests.swift */; };
-		17A5856024C1DAB7004747BB /* SwiftWeatherTemplateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5855F24C1DAB7004747BB /* SwiftWeatherTemplateUITests.swift */; };
+		17A5855524C1DAB7004747BB /* OpenWeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5855424C1DAB7004747BB /* OpenWeatherTests.swift */; };
+		17A5856024C1DAB7004747BB /* OpenWeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5855F24C1DAB7004747BB /* OpenWeatherUITests.swift */; };
 		17A5856E24C1DAE2004747BB /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 17A5856D24C1DAE2004747BB /* .swiftlint.yml */; };
 		17A5857124C1DAEA004747BB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 17A5856F24C1DAEA004747BB /* README.md */; };
 		17A5857224C1DAEA004747BB /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 17A5857024C1DAEA004747BB /* LICENSE */; };
@@ -108,10 +108,10 @@
 		17A5854924C1DAB7004747BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		17A5854B24C1DAB7004747BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17A5855024C1DAB7004747BB /* OpenWeatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenWeatherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		17A5855424C1DAB7004747BB /* SwiftWeatherTemplateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftWeatherTemplateTests.swift; sourceTree = "<group>"; };
+		17A5855424C1DAB7004747BB /* OpenWeatherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherTests.swift; sourceTree = "<group>"; };
 		17A5855624C1DAB7004747BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17A5855B24C1DAB7004747BB /* OpenWeatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenWeatherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		17A5855F24C1DAB7004747BB /* SwiftWeatherTemplateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftWeatherTemplateUITests.swift; sourceTree = "<group>"; };
+		17A5855F24C1DAB7004747BB /* OpenWeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherUITests.swift; sourceTree = "<group>"; };
 		17A5856124C1DAB7004747BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17A5856D24C1DAE2004747BB /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		17A5856F24C1DAEA004747BB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -240,9 +240,9 @@
 				17A5857024C1DAEA004747BB /* LICENSE */,
 				17A5856F24C1DAEA004747BB /* README.md */,
 				17A5856D24C1DAE2004747BB /* .swiftlint.yml */,
-				17A5853C24C1DAB7004747BB /* SwiftWeatherTemplate */,
-				17A5855324C1DAB7004747BB /* SwiftWeatherTemplateTests */,
-				17A5855E24C1DAB7004747BB /* SwiftWeatherTemplateUITests */,
+				17A5853C24C1DAB7004747BB /* OpenWeather */,
+				17A5855324C1DAB7004747BB /* OpenWeatherTests */,
+				17A5855E24C1DAB7004747BB /* OpenWeatherUITests */,
 				17A5853B24C1DAB7004747BB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -257,7 +257,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		17A5853C24C1DAB7004747BB /* SwiftWeatherTemplate */ = {
+		17A5853C24C1DAB7004747BB /* OpenWeather */ = {
 			isa = PBXGroup;
 			children = (
 				17827B0524C38B2B009165F1 /* Config */,
@@ -271,25 +271,25 @@
 				17A5854824C1DAB7004747BB /* LaunchScreen.storyboard */,
 				17A5854B24C1DAB7004747BB /* Info.plist */,
 			);
-			path = SwiftWeatherTemplate;
+			path = OpenWeather;
 			sourceTree = "<group>";
 		};
-		17A5855324C1DAB7004747BB /* SwiftWeatherTemplateTests */ = {
+		17A5855324C1DAB7004747BB /* OpenWeatherTests */ = {
 			isa = PBXGroup;
 			children = (
-				17A5855424C1DAB7004747BB /* SwiftWeatherTemplateTests.swift */,
+				17A5855424C1DAB7004747BB /* OpenWeatherTests.swift */,
 				17A5855624C1DAB7004747BB /* Info.plist */,
 			);
-			path = SwiftWeatherTemplateTests;
+			path = OpenWeatherTests;
 			sourceTree = "<group>";
 		};
-		17A5855E24C1DAB7004747BB /* SwiftWeatherTemplateUITests */ = {
+		17A5855E24C1DAB7004747BB /* OpenWeatherUITests */ = {
 			isa = PBXGroup;
 			children = (
-				17A5855F24C1DAB7004747BB /* SwiftWeatherTemplateUITests.swift */,
+				17A5855F24C1DAB7004747BB /* OpenWeatherUITests.swift */,
 				17A5856124C1DAB7004747BB /* Info.plist */,
 			);
-			path = SwiftWeatherTemplateUITests;
+			path = OpenWeatherUITests;
 			sourceTree = "<group>";
 		};
 		17CAB94224D694AD000ECCB8 /* ViewModel */ = {
@@ -513,7 +513,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17A5855524C1DAB7004747BB /* SwiftWeatherTemplateTests.swift in Sources */,
+				17A5855524C1DAB7004747BB /* OpenWeatherTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,7 +521,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17A5856024C1DAB7004747BB /* SwiftWeatherTemplateUITests.swift in Sources */,
+				17A5856024C1DAB7004747BB /* OpenWeatherUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,7 +683,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MAVP5V2N7V;
-				INFOPLIST_FILE = SwiftWeatherTemplate/Info.plist;
+				INFOPLIST_FILE = OpenWeather/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -703,7 +703,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MAVP5V2N7V;
-				INFOPLIST_FILE = SwiftWeatherTemplate/Info.plist;
+				INFOPLIST_FILE = OpenWeather/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -724,7 +724,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MAVP5V2N7V;
-				INFOPLIST_FILE = SwiftWeatherTemplateTests/Info.plist;
+				INFOPLIST_FILE = OpenWeatherTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -747,7 +747,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MAVP5V2N7V;
-				INFOPLIST_FILE = SwiftWeatherTemplateTests/Info.plist;
+				INFOPLIST_FILE = OpenWeatherTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -768,7 +768,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MAVP5V2N7V;
-				INFOPLIST_FILE = SwiftWeatherTemplateUITests/Info.plist;
+				INFOPLIST_FILE = OpenWeatherUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -776,9 +776,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kvs.SwiftWeatherTemplateUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SwiftWeatherTemplate;
+				TEST_TARGET_NAME = OpenWeather;
 			};
 			name = Debug;
 		};
@@ -789,7 +790,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MAVP5V2N7V;
-				INFOPLIST_FILE = SwiftWeatherTemplateUITests/Info.plist;
+				INFOPLIST_FILE = OpenWeatherUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -797,9 +798,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kvs.SwiftWeatherTemplateUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SwiftWeatherTemplate;
+				TEST_TARGET_NAME = OpenWeather;
 			};
 			name = Release;
 		};
